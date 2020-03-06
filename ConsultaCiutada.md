@@ -27,10 +27,10 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 |Element | Descripció|
 |------- | ----------|
 |PCIConsultaCiutadaResponse/PCIConsultaCiutadaResult/resultat/codiResultat | -1: La petició no és correcta o no compleix l’esquema|
-| | -2: el ciutadà no s’ha trobat. No es retorna l’apartat ciutada|
-| | -6: el servei Hèstia no està disponible en aquest moment. La petició s’ha de tornar a enviar més endavant|
-| | -9: només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
-| | 0: el ciutadà s'ha localitzat correctament. Les seves dades es retornen a l’apartat ciutadà|
+| | -2: El ciutadà no s’ha trobat. No es retorna l’apartat *ciutada*|
+| | -6: El servei Hèstia no està disponible en aquest moment. La petició s’ha de tornar a enviar més endavant|
+| | -9: Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
+| | 0: el ciutadà s'ha localitzat correctament. Les seves dades es retornen a l’apartat *ciutadà*|
 |PCIConsultaCiutadaResponse/PCIConsultaCiutadaResult/resultat/descripcio| Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius.|
 
 ### ciutada/informacioBasica
@@ -300,3 +300,244 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 |//informacioAmpliada/dadesRegistre/nomUsuariModificacio | Nom del darrer professional que va modificar la fitxa ampliada del ciutadà|
 |//informacioAmpliada/dadesRegistre/idUsuariResponsable | Identificador del professional referent assignat al ciutadà|
 |//informacioAmpliada/dadesRegistre/nomUsuariResponsable | Nom del professional referent assignat al ciutadà|
+
+## Joc de proves
+El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
+
+|codiINE | idInternCiutada | NIF | CIP | Resultat|
+|------- | --------------- | --- | --- | --------|
+|999999999 | | | | (-9) Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
+|9821920002 | | | | (-1) Identificador no vàlid. Ha d'indicar un idInternCiutada, un NIF o un CIP|
+|9821920002	| 999999999 | | | (-2) El ciutadà no s’ha trobat|
+|9821920002	| | 88888888R | | (-2) El ciutadà no s’ha trobat|
+|9821920002	| | | TASA9999999999 | (-2) El ciutadà no s’ha trobat|
+|9821920002	| 370001147 | | | (0)	El ciutadà s'ha localitzat correctament|
+|9821920002	| | 00181584E | | (0)  El ciutadà s'ha localitzat correctament|
+|9821920002	| | | MAMA1721012002 | (0)  El ciutadà s'ha localitzat correctament|
+|9821920002	| 370001147 | 88888888R | |  (0)  El ciutadà s'ha localitzat correctament|
+|9821920002	| 370001147	| | TASA9999999999 | (0)  El ciutadà s'ha localitzat correctament|
+|9821920002	| | 00181584E | TASA9999999999 | (0)  El ciutadà s'ha localitzat correctament|
+
+
+## Petició d'exemple
+```xml
+<soapenv:Envelope xmlns:nt="http://www.aocat.net/NT" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <nt:procesa xmlns:nt="http://www.openuri.org/">
+         <ns0:Peticion xmlns:ns0="http://gencat.net/scsp/esquemes/peticion">
+            <ns0:Atributos>
+               <ns0:IdPeticion>HESTIA_CONSULTA_CIUTADA_${=UUID.randomUUID()}</ns0:IdPeticion>
+               <ns0:NumElementos>1</ns0:NumElementos>
+               <ns0:CodigoCertificado>HESTIA_CONSULTA_CIUTADA</ns0:CodigoCertificado>
+               <ns0:CodigoProducto>HESTIA</ns0:CodigoProducto>
+               <ns0:DatosAutorizacion>
+                  <ns0:IdentificadorSolicitante>2512070005</ns0:IdentificadorSolicitante>
+                  <ns0:Finalidad>PROVES</ns0:Finalidad>
+               </ns0:DatosAutorizacion>
+            </ns0:Atributos>
+            <ns0:Solicitudes>
+               <ns0:SolicitudTransmision>
+                  <ns0:DatosGenericos>
+                     <ns0:Solicitante>
+                        <ns0:IdentificadorSolicitante>9821920002</ns0:IdentificadorSolicitante>
+                        <ns0:NombreSolicitante>CAOC</ns0:NombreSolicitante>
+                        <ns0:Finalidad>PROVES</ns0:Finalidad>
+                        <ns0:Consentimiento>Si</ns0:Consentimiento>
+                     </ns0:Solicitante>
+                     <ns0:Transmision>
+                        <ns0:CodigoCertificado>HESTIA_CONSULTA_CIUTADA</ns0:CodigoCertificado>
+                        <ns0:IdSolicitud>171254</ns0:IdSolicitud>
+                        <ns0:FechaGeneracion>2013-10-02</ns0:FechaGeneracion>
+                     </ns0:Transmision>
+                  </ns0:DatosGenericos>
+                  <ns0:DatosEspecificos>
+                     <ns2:PCIConsultaCiutada xmlns:ns2="http://www.aoc.cat/hestia/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <ns2:codiINE>9821920002</ns2:codiINE>
+                        <ns2:NIF>00181584E</ns2:NIF>
+                     </ns2:PCIConsultaCiutada>
+                  </ns0:DatosEspecificos>                  
+               </ns0:SolicitudTransmision>
+            </ns0:Solicitudes>
+         </ns0:Peticion>
+      </nt:procesa>
+   </soapenv:Body>
+```
+
+## Resposta d'exemple
+```xml
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <ns0:procesaResponse xmlns:ns0="http://www.openuri.org/" xmlns:ns3="http://gencat.net/scsp/esquemes/respuesta" xmlns:ns2="http://gencat.net/scsp/esquemes/peticion">
+         <ns3:Respuesta>
+            <ns3:Atributos>
+               <ns3:IdPeticion>HESTIA_NOVA_CONSULTA_CIUTADA_c2ea0756-666e-4903-8138-d077f4543be7</ns3:IdPeticion>
+               <ns3:NumElementos>1</ns3:NumElementos>
+               <ns3:TimeStamp>2020-03-06T12:46:56.038+01:00</ns3:TimeStamp>
+               <ns3:Estado>
+                  <ns3:CodigoEstado>0003</ns3:CodigoEstado>
+                  <ns3:LiteralError>OK</ns3:LiteralError>
+                  <ns3:TiempoEstimadoRespuesta>0</ns3:TiempoEstimadoRespuesta>
+               </ns3:Estado>
+               <ns3:CodigoCertificado>HESTIA_CONSULTA_CIUTADA</ns3:CodigoCertificado>
+               <ns3:CodigoProducto>HESTIA</ns3:CodigoProducto>
+            </ns3:Atributos>
+            <ns3:Transmisiones>
+               <ns3:TransmisionDatos>
+                  <ns3:DatosGenericos>
+                     <ns3:Solicitante>
+                        <ns3:IdentificadorSolicitante>9821920002</ns3:IdentificadorSolicitante>
+                        <ns3:NombreSolicitante>CAOC</ns3:NombreSolicitante>
+                        <ns3:Finalidad>PROVES</ns3:Finalidad>
+                        <ns3:Consentimiento>Si</ns3:Consentimiento>
+                     </ns3:Solicitante>
+                     <ns3:Transmision>
+                        <ns3:CodigoCertificado>HESTIA_CONSULTA_CIUTADA</ns3:CodigoCertificado>
+                        <ns3:IdSolicitud>171254</ns3:IdSolicitud>
+                        <ns3:IdTransmision/>
+                        <ns3:FechaGeneracion>2013-10-02</ns3:FechaGeneracion>
+                     </ns3:Transmision>
+                  </ns3:DatosGenericos>
+                  <ns3:DatosEspecificos>
+                     <PCIConsultaCiutadaResponse xmlns="http://www.aoc.cat/hestia/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <PCIConsultaCiutadaResult>
+                           <resultat>
+                              <codiResultat>0</codiResultat>
+                              <descripcio>El ciutada s'ha localitzat correctament</descripcio>
+                           </resultat>
+                           <ciutada>
+                              <informacioBasica>
+                                 <identificacioCiutada>
+                                    <idInternCiutada>370001147</idInternCiutada>
+                                    <idTipusDocumentacio>0</idTipusDocumentacio>
+                                    <NIF>00181584E</NIF>
+                                    <CIP>MAMA1721012002</CIP>
+                                 </identificacioCiutada>
+                                 <nom>CARLA</nom>
+                                 <cognom1>MALDONADO</cognom1>
+                                 <cognom2>MARQUES</cognom2>
+                                 <estat>
+                                    <estat>0</estat>
+                                    <dataExitus>1900-01-01T00:00:00</dataExitus>
+                                 </estat>
+                                 <dadesNaixement>
+                                    <nasciturus>0</nasciturus>
+                                    <dataNaixement>1970-01-01T00:00:00</dataNaixement>
+                                    <idPais>52</idPais>
+                                    <descPais>Espanya</descPais>
+                                    <idProvincia>9</idProvincia>
+                                    <descProvincia>Barcelona</descProvincia>
+                                    <idMunicipi>81944</idMunicipi>
+                                    <descMunicipi>Sant Adrià de Besòs</descMunicipi>
+                                 </dadesNaixement>
+                                 <dadesContacte>
+                                    <telefon1>551181584</telefon1>
+                                    <telefon2>551181584</telefon2>
+                                    <email>correu@electronic.com</email>
+                                 </dadesContacte>
+                                 <sexe>D</sexe>
+                                 <adrecaResidencia>
+                                    <transeunt>0</transeunt>
+                                    <idRegim>0</idRegim>
+                                    <idProvincia>27</idProvincia>
+                                    <descProvincia>Lleida</descProvincia>
+                                    <idMunicipi>251207</idMunicipi>
+                                    <descMunicipi>Lleida</descMunicipi>
+                                    <localitatBarri>SECA DE SANT PERE</localitatBarri>
+                                    <CP>25005</CP>
+                                    <idTipusVia>10</idTipusVia>
+                                    <nomVia>EMILI SUBIAS, PL</nomVia>
+                                    <numero>3</numero>
+                                    <bloc>2</bloc>
+                                    <escala>1</escala>
+                                    <pis>9</pis>
+                                    <porta>4</porta>
+                                 </adrecaResidencia>
+                                 <nucliConvivencia>
+                                    <idTipusFamilia>7</idTipusFamilia>
+                                    <idNucliConvivencia>3</idNucliConvivencia>
+                                    <numMembres>4</numMembres>
+                                    <numMenors>2</numMenors>
+                                    <numFills>2</numFills>
+                                    <numACarrec>1</numACarrec>
+                                 </nucliConvivencia>
+                                 <dependencia>
+                                    <dependent>1</dependent>
+                                    <grauDependencia>1</grauDependencia>
+                                    <expeDP>EX1324K</expeDP>
+                                 </dependencia>
+                                 <discapacitat>
+                                    <discapacitat>1</discapacitat>
+                                    <grauDiscapacitat>20</grauDiscapacitat>
+                                 </discapacitat>
+                                 <dadesRegistre>
+                                    <dataAlta>2008-06-12T00:00:00</dataAlta>
+                                    <IdUsuariAlta>-1</IdUsuariAlta>
+                                    <dataModificacio>2018-01-09T11:47:31.533</dataModificacio>
+                                    <idUsuariModificacio>370000037</idUsuariModificacio>
+                                    <nomUsuariModificacio>ADAM CRESPO QUILES</nomUsuariModificacio>
+                                    <idUsuariResponsable>370000068</idUsuariResponsable>
+                                    <nomUsuariResponsable>ROSA SALGUERO AMAYA</nomUsuariResponsable>
+                                 </dadesRegistre>
+                              </informacioBasica>
+                              <informacioAmpliada>
+                                 <activitatLaboral>
+                                    <idActivitatLaboral>16</idActivitatLaboral>
+                                    <permisTreball>1</permisTreball>
+                                    <dataCaducitatPermis>2022-01-01T00:00:00</dataCaducitatPermis>
+                                    <idMunicipi>81944</idMunicipi>
+                                    <descMunicipi>Sant Adrià de Besòs</descMunicipi>
+                                    <idSectorLaboral>1</idSectorLaboral>
+                                    <ocupacioComptePropi>1</ocupacioComptePropi>
+                                    <ocupacioCompteAltre>1</ocupacioCompteAltre>
+                                    <ingressos>230</ingressos>
+                                 </activitatLaboral>
+                                 <dadesImmigrants>
+                                    <idSituacioLegal>9</idSituacioLegal>
+                                    <dataArribadaEspanya>1990-01-01T00:00:00</dataArribadaEspanya>
+                                    <dataArribadaMunicipi>1990-01-01T00:00:00</dataArribadaMunicipi>
+                                    <dataCaducitatNIE>1990-01-01T00:00:00</dataCaducitatNIE>
+                                    <pendentReagrupament>
+                                       <pares>1</pares>
+                                       <fills>1</fills>
+                                       <conjuge>1</conjuge>
+                                    </pendentReagrupament>
+                                 </dadesImmigrants>
+                                 <estudisIdiomes>
+                                    <idHabilitatComunicativa>1</idHabilitatComunicativa>
+                                    <idLlenguaMaterna>77</idLlenguaMaterna>
+                                    <descLlenguaMaterna>suec</descLlenguaMaterna>
+                                    <idNivellFormacio>3</idNivellFormacio>
+                                    <estudisHomologats>1</estudisHomologats>
+                                 </estudisIdiomes>
+                                 <associacions>
+                                    <pertanyAssociacio>1</pertanyAssociacio>
+                                    <tipus>3</tipus>
+                                    <nom>ENS</nom>
+                                 </associacions>
+                                 <suport>
+                                    <ONG>1</ONG>
+                                    <administracioPublica>1</administracioPublica>
+                                    <associacionsImmigrants>1</associacionsImmigrants>
+                                    <personesAltres>1</personesAltres>
+                                 </suport>
+                                 <dadesRegistre>
+                                    <dataAlta>2008-06-12T00:00:00</dataAlta>
+                                    <IdUsuariAlta>-1</IdUsuariAlta>
+                                    <dataModificacio>2018-01-09T11:47:31.533</dataModificacio>
+                                    <idUsuariModificacio>370000037</idUsuariModificacio>
+                                    <nomUsuariModificacio>ADAM CRESPO QUILES</nomUsuariModificacio>
+                                    <idUsuariResponsable>370000068</idUsuariResponsable>
+                                    <nomUsuariResponsable>ROSA SALGUERO AMAYA</nomUsuariResponsable>
+                                 </dadesRegistre>
+                              </informacioAmpliada>
+                           </ciutada>
+                        </PCIConsultaCiutadaResult>
+                     </PCIConsultaCiutadaResponse>
+                  </ns3:DatosEspecificos>
+               </ns3:TransmisionDatos>
+            </ns3:Transmisiones>
+         </ns3:Respuesta>
+      </ns0:procesaResponse>
+   </S:Body>
+</S:Envelope>
+```

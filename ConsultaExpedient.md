@@ -14,11 +14,11 @@ A continuació es detalla la missatgeria corresponent al bloc de dades específi
 ## Petició - dades específiques
 La missatgeria específica de la petició *HESTIA_EXPEDIENT* es troba definida al document [Peticio_DadesEspecifiques_Expedient.xsd](xsd/Peticio_DadesEspecifiques_Expedient.xsd)
 
-![Peticio_consulta_expedient.png](img/Peticio_consulta_expedient.png)
+![Peticio_consulta_expedient.png](img/Peticio_consulta_Expedient.png)
 
 |Element | Descripció|
 |------- | ----------|
-|DadesEspecifiques/CodiINE | Codi de l'Àrea Bàsica de Serveis Socials|
+|DadesEspecifiques/CodINE | Codi de l'Àrea Bàsica de Serveis Socials|
 |DadesEspecifiques/IdExpedient | Identificador intern de l’expedient dins l’Hèstia. Aquest és el paràmetre que recomanem utilitzar sempre que sigui possible (especialment per consultes futures sobre un mateix expedient)|
 |DadesEspecifiques/NumExpedient | Número d’expedient utilitzat pels professionals de l’ABSS|
 |DadesEspecifiques/DNI | DNI, NIE o passaport de la persona vinculada a l'expedient.|
@@ -31,10 +31,10 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |Element | Descripció|
 |------- | ----------|
 |RespostaConsultaExpedients/Resultat/CodiResultat | -1: La petició no és correcta o no compleix l’esquema|
-| | -2: No s'ha localitzat l'expedient. No es retorna l’apartat LListaExpedients|
-| | -6: el servei Hèstia no està disponible en aquest moment. La petició s’ha de tornar a enviar més endavant|
+| | -2: No s'ha localitzat l'expedient. No es retorna l’apartat *LlistaExpedients*|
+| | -6: El servei Hèstia no està disponible en aquest moment. La petició s’ha de tornar a enviar més endavant|
 | | -9: Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
-| | 0: L’expedient s'ha localitzat correctament. Es retorna en l’apartat “LlistaExpedients” l’expedient sol·licitat|
+| | 0: L’expedient s'ha localitzat correctament. Es retorna a l’apartat *LlistaExpedients* l’expedient sol·licitat|
 |RespostaConsultaExpedients/Resultat/Descripcio | Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius|
 |RespostaConsultaExpedients/LlistaExpedients | Llista d’expedients localitzats, apareixerà buida en cas d'error o si no s’ha pogut localitzar l’expedient indicat. Normalment aquesta llista retornarà 1 únic expedient, ara bé, si es fa la cerca de l’expedient a partir del DNI/NIE/Passaport del ciutadà i aquest disposa de més d’un expedient obert en l’ABSS (situació que en principi no s’hauria de donar de forma habitual) llavors sí que es pot retornar una llista d’expedients|
 
@@ -127,7 +127,7 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |//Expedient/Habitatge/Pis | Número de pis|
 |//Expedient/Habitatge/Porta | Porta de l'habitatge|
 |//Expedient/Habitatge/Bloc | Bloc de l’habitatge|
-|//Expedient/Habitatge/Escala | Escala de ‘habitatge|
+|//Expedient/Habitatge/Escala | Escala de l‘habitatge|
 |//Expedient/PersonesVinculades | Relació de persones vinculades a l’expedient|
 |//Expedient/PersonesVinculades/PersonaVinculada | Dades del ciutadà vinculat a l'expedient|
 |//Expedient/PersonesVinculades/PersonaVinculada/IdPersona | Identificador intern dins l’Hèstia de la persona|
@@ -137,7 +137,7 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |//Expedient/PersonesVinculades/PersonaVinculada/Cognom2 | Segon cognom de la persona|
 |//Expedient/PersonesVinculades/PersonaVinculada/CIP | Codi d’identificació personal assignat per CatSalut|
 |//Expedient/PersonesVinculades/PersonaVinculada/IdTipusRelacio | Identificador del tipus de relació del ciutadà amb l'expedient|
-|//Expedient/PersonesVinculades/PersonaVinculada/TipusRelacio | Descripció del tipus de relació del ciutadà amb la “Persona principal”. Tot expedient ha de tenir una única "Persona principal" i per a la resta de persones vinculades s’indica la seva relació amb la "Persona principal"|
+|//Expedient/PersonesVinculades/PersonaVinculada/TipusRelacio | Descripció del tipus de relació del ciutadà amb la *Persona principal*. Tot expedient ha de tenir una única *Persona principal* i per a la resta de persones vinculades s’indica la seva relació amb la *Persona principal*:|
 | | 1: Altres|
 | | 2: Avi/àvia, nét/a|
 | | 3: Fill/a|
@@ -152,3 +152,222 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |//Expedient/Tramits/IdTramit | Identificador únic del tràmit associat a l'expedient. Aquest és l’identificador que s’ha d’utilitzar en la consulta *[HESTIA_TRAMITS](ConsultaTramits.md)* si es vol obtenir els detalls del tràmit|
 |//Expedient/Recursos | Llista de recursos en estat concedit vinculats a l'expedient|
 |//Expedient/Recursos/IdRecurs | Identificador únic del recurs associat a l'expedient. Aquest és l’identificador que s’ha d’utilitzar en la consulta *[HESTIA_RECURSOS](ConsultaRecursos.md)* si es vol obtenir els detalls del recurs|
+
+## Joc de proves
+El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
+
+|codINE | IdExpedient | NumExpedient | DNI | Resultat|
+|------ | ----------- | ------------ | --- | --------|
+|999999999 | | | | (-9) Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
+|9821920002 | | | | (-2) No s'ha localitzat l'expedient|
+|9821920002	| XYZ | | | (-1) La petició no és correcta o no compleix l’esquema|
+|9821920002 | 999999999 | | | (-2) No s'ha localitzat l'expedient|
+|9821920002 | | 999999999 | | (-2) No s'ha localitzat l'expedient|
+|9821920002	| | | 999999999 | (-2) No s'ha localitzat l'expedient|
+|9821920002 | 370034917 | | | (0) Els expedients s'han localitzat correctament|
+|9821920002	| | EXP2017/00874 | | (0) Els expedients s'han localitzat correctament|
+|9821920002	| | | 00181584E | (0) Els expedients s'han localitzat correctament|
+
+## Petició d'exemple
+```xml
+<soapenv:Envelope xmlns:nt="http://www.aocat.net/NT" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <nt:procesa xmlns:nt="http://www.openuri.org/">
+         <ns0:Peticion xmlns:ns0="http://gencat.net/scsp/esquemes/peticion">
+            <ns0:Atributos>
+               <ns0:IdPeticion>HESTIA_EXPEDIENT_${=UUID.randomUUID()}</ns0:IdPeticion>
+               <ns0:NumElementos>1</ns0:NumElementos>
+               <ns0:CodigoCertificado>HESTIA_EXPEDIENT</ns0:CodigoCertificado>
+               <ns0:CodigoProducto>HESTIA</ns0:CodigoProducto>
+               <ns0:DatosAutorizacion>
+                  <ns0:IdentificadorSolicitante>2512070005</ns0:IdentificadorSolicitante>
+                  <ns0:Finalidad>PROVES</ns0:Finalidad>
+               </ns0:DatosAutorizacion>
+            </ns0:Atributos>
+            <ns0:Solicitudes>
+               <ns0:SolicitudTransmision>
+                  <ns0:DatosGenericos>
+                     <ns0:Solicitante>
+                        <ns0:IdentificadorSolicitante>9821920002</ns0:IdentificadorSolicitante>
+                        <ns0:NombreSolicitante>CAOC</ns0:NombreSolicitante>
+                        <ns0:Finalidad>PROVES</ns0:Finalidad>
+                        <ns0:Consentimiento>Si</ns0:Consentimiento>
+                     </ns0:Solicitante>
+                     <ns0:Transmision>
+                        <ns0:CodigoCertificado>HESTIA_EXPEDIENT</ns0:CodigoCertificado>
+                        <ns0:IdSolicitud>171254</ns0:IdSolicitud>
+                        <ns0:FechaGeneracion>2013-10-02</ns0:FechaGeneracion>
+                     </ns0:Transmision>
+                  </ns0:DatosGenericos>
+                  <ns0:DatosEspecificos>
+                     <DadesEspecifiques xmlns="http://www.aoc.cat/hestia/">
+                        <CodINE>9821920002</CodINE>
+                        <NumExpedient>EXP2017/00874</NumExpedient>
+                     </DadesEspecifiques>
+                  </ns0:DatosEspecificos>
+               </ns0:SolicitudTransmision>
+            </ns0:Solicitudes>
+         </ns0:Peticion>
+      </nt:procesa>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+
+## Resposta d'exemple
+```xml
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <ns0:procesaResponse xmlns:ns0="http://www.openuri.org/" xmlns:ns3="http://gencat.net/scsp/esquemes/respuesta" xmlns:ns2="http://gencat.net/scsp/esquemes/peticion">
+         <ns3:Respuesta>
+            <ns3:Atributos>
+               <ns3:IdPeticion>HESTIA_EXPEDIENT_e7bde47d-a102-4ded-8db5-c806d4fd6c37</ns3:IdPeticion>
+               <ns3:NumElementos>1</ns3:NumElementos>
+               <ns3:TimeStamp>2020-03-06T12:49:41.773+01:00</ns3:TimeStamp>
+               <ns3:Estado>
+                  <ns3:CodigoEstado>0003</ns3:CodigoEstado>
+                  <ns3:LiteralError>OK</ns3:LiteralError>
+                  <ns3:TiempoEstimadoRespuesta>0</ns3:TiempoEstimadoRespuesta>
+               </ns3:Estado>
+               <ns3:CodigoCertificado>HESTIA_EXPEDIENT</ns3:CodigoCertificado>
+               <ns3:CodigoProducto>HESTIA</ns3:CodigoProducto>
+            </ns3:Atributos>
+            <ns3:Transmisiones>
+               <ns3:TransmisionDatos>
+                  <ns3:DatosGenericos>
+                     <ns3:Solicitante>
+                        <ns3:IdentificadorSolicitante>9821920002</ns3:IdentificadorSolicitante>
+                        <ns3:NombreSolicitante>CAOC</ns3:NombreSolicitante>
+                        <ns3:Finalidad>PROVES</ns3:Finalidad>
+                        <ns3:Consentimiento>Si</ns3:Consentimiento>
+                     </ns3:Solicitante>
+                     <ns3:Transmision>
+                        <ns3:CodigoCertificado>HESTIA_EXPEDIENT</ns3:CodigoCertificado>
+                        <ns3:IdSolicitud>171254</ns3:IdSolicitud>
+                        <ns3:IdTransmision/>
+                        <ns3:FechaGeneracion>2013-10-02</ns3:FechaGeneracion>
+                     </ns3:Transmision>
+                  </ns3:DatosGenericos>
+                  <ns3:DatosEspecificos>
+                     <RespostaConsultaExpedients xmlns="http://www.aoc.cat/hestia/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <Resultat>
+                           <CodiResultat>0</CodiResultat>
+                           <Descripcio>L'expedient s'ha localitzat correctament</Descripcio>
+                        </Resultat>
+                        <LlistaExpedients>
+                           <Expedient>
+                              <IdExpedient>370034917</IdExpedient>
+                              <NumExpedient>EXP2017/00874</NumExpedient>
+                              <IdEstat>1</IdEstat>
+                              <Estat>Obert</Estat>
+                              <DtEstat>2017-04-06T12:32:38.45</DtEstat>
+                              <IdSector>251207</IdSector>
+                              <Sector>Lleida</Sector>
+                              <IdSubsector>490000071</IdSubsector>
+                              <Subsector>Inclusió-Ereta</Subsector>
+                              <NomFamiliar>LAZARO MALDONADO</NomFamiliar>
+                              <IdProcedenciaDelCas>1</IdProcedenciaDelCas>
+                              <ProcedenciaDelCas>Personalment</ProcedenciaDelCas>
+                              <IdTipusFamilia>4</IdTipusFamilia>
+                              <TipusFamilia>Nuclear</TipusFamilia>
+                              <IdResidenciaFamiliar>4</IdResidenciaFamiliar>
+                              <ResidenciaFamiliar>Fora de la Unió Europea</ResidenciaFamiliar>
+                              <IdSituacioExpedient>1</IdSituacioExpedient>
+                              <SituacioExpedient>Acollida</SituacioExpedient>
+                              <IdGrauRisc>0</IdGrauRisc>
+                              <GrauRisc>Sense Valorar</GrauRisc>
+                              <IdEquipReferent>370000006</IdEquipReferent>
+                              <EquipReferent>INCLUSIÓ SOCIAL</EquipReferent>
+                              <ProfReferent>
+                                 <DNIUsuari>00001194K</DNIUsuari>
+                                 <NomUsuari>JENIFER MIRALLES PAZ</NomUsuari>
+                              </ProfReferent>
+                              <ProfCorreferent/>
+                              <ProfAlta>
+                                 <DNIUsuari>00000332X</DNIUsuari>
+                                 <NomUsuari>ABRIL CAMARERO ALASA</NomUsuari>
+                              </ProfAlta>
+                              <ProfMod>
+                                 <DNIUsuari>00000381J</DNIUsuari>
+                                 <NomUsuari>NAIMA SANTANA TORRENTS</NomUsuari>
+                              </ProfMod>
+                              <Habitatge>
+                                 <IdProvincia>27</IdProvincia>
+                                 <Provincia>Lleida</Provincia>
+                              </Habitatge>
+                              <PersonesVinculades>
+                                 <PersonaVinculada>
+                                    <IdPersona>370001147</IdPersona>
+                                    <DNI>00181584E</DNI>
+                                    <Nom>CARLA</Nom>
+                                    <Cognom1>MALDONADO</Cognom1>
+                                    <Cognom2>MARQUES</Cognom2>
+                                    <CIP>MAMA1721012002</CIP>
+                                    <IdTipusRelacio>10</IdTipusRelacio>
+                                    <TipusRelacio>Espòs/osa, company/a</TipusRelacio>
+                                 </PersonaVinculada>
+                                 <PersonaVinculada>
+                                    <IdPersona>370062749</IdPersona>
+                                    <DNI>00235062W</DNI>
+                                    <Nom>PAULA</Nom>
+                                    <Cognom1>LAZARO</Cognom1>
+                                    <Cognom2>GUISADO</Cognom2>
+                                    <CIP/>
+                                    <IdTipusRelacio>8</IdTipusRelacio>
+                                    <TipusRelacio>Persona principal</TipusRelacio>
+                                 </PersonaVinculada>
+                              </PersonesVinculades>
+                              <Tramits>
+                                 <IdTramit>370059167</IdTramit>
+                                 <IdTramit>370063148</IdTramit>
+                                 <IdTramit>490024808</IdTramit>
+                                 <IdTramit>490035473</IdTramit>
+                                 <IdTramit>490039038</IdTramit>
+                                 <IdTramit>490039044</IdTramit>
+                                 <IdTramit>490039530</IdTramit>
+                                 <IdTramit>490042663</IdTramit>
+                                 <IdTramit>490042666</IdTramit>
+                                 <IdTramit>490042672</IdTramit>
+                                 <IdTramit>490045816</IdTramit>
+                                 <IdTramit>490045948</IdTramit>
+                                 <IdTramit>490048797</IdTramit>
+                                 <IdTramit>490050725</IdTramit>
+                                 <IdTramit>490050732</IdTramit>
+                                 <IdTramit>490059658</IdTramit>
+                                 <IdTramit>490079336</IdTramit>
+                                 <IdTramit>490079338</IdTramit>
+                                 <IdTramit>490081695</IdTramit>
+                                 <IdTramit>490093847</IdTramit>
+                                 <IdTramit>490125520</IdTramit>
+                                 <IdTramit>490130207</IdTramit>
+                              </Tramits>
+                              <Recursos>
+                                 <IdRecurs>370456978</IdRecurs>
+                                 <IdRecurs>370458539</IdRecurs>
+                                 <IdRecurs>490103774</IdRecurs>
+                                 <IdRecurs>490122074</IdRecurs>
+                                 <IdRecurs>490129115</IdRecurs>
+                                 <IdRecurs>490129990</IdRecurs>
+                                 <IdRecurs>490135540</IdRecurs>
+                                 <IdRecurs>490135563</IdRecurs>
+                                 <IdRecurs>490141555</IdRecurs>
+                                 <IdRecurs>490141767</IdRecurs>
+                                 <IdRecurs>490148055</IdRecurs>
+                                 <IdRecurs>490153470</IdRecurs>
+                                 <IdRecurs>490173328</IdRecurs>
+                                 <IdRecurs>490207803</IdRecurs>
+                                 <IdRecurs>490207806</IdRecurs>
+                                 <IdRecurs>490278541</IdRecurs>
+                                 <IdRecurs>490286582</IdRecurs>
+                              </Recursos>
+                           </Expedient>
+                        </LlistaExpedients>
+                     </RespostaConsultaExpedients>
+                  </ns3:DatosEspecificos>
+               </ns3:TransmisionDatos>
+            </ns3:Transmisiones>
+         </ns3:Respuesta>
+      </ns0:procesaResponse>
+   </S:Body>
+</S:Envelope>
+```
