@@ -1,4 +1,4 @@
-# Consulta Recursos (HESTIA_RECURSOS)
+# 1. Consulta Recursos (HESTIA_RECURSOS)
 Els recursos fan referència als serveis, prestacions, ajuts o intervencions sol·licitats per a un usuari dels Serveis Socials amb l'objectiu d'atenuar o solucionar les problemàtiques detectades o de satisfer les seves peticions.
 
 Aquesta operació permet consultar les dades d’un recurs o d’una llista de recursos a partir del/s seu/s identificador/s intern/s i del Codi INE de l'Àrea Bàsica de Serveis Socials als que pertanyen. En el cas de passar una llista de recursos, el caràcter que s’haurà d’utilitzar com a separador és "," (la coma).
@@ -6,7 +6,7 @@ Si es passa una llista de recursos, no és obligatori que pertanyin al mateix ex
 S'ha de tenir en compte que actualment només es permet la consulta de recursos de la pròpia ABSS que realitza la petició.
 A continuació es detalla la missatgeria corresponent al bloc de dades específiques. 
 
-## Petició - dades específiques
+## 1.1. Petició - dades específiques
 La missatgeria específica de la petició *HESTIA_RECURSOS* es troba definida al document [Peticio_DadesEspecifiques_Recursos.xsd](xsd/Peticio_DadesEspecifiques_Recursos.xsd)
 
 ![Peticio_consulta_recursos.png](img/Peticio_consulta_recursos.png)
@@ -16,7 +16,7 @@ La missatgeria específica de la petició *HESTIA_RECURSOS* es troba definida al
 |DadesEspecifiques/CodINE | Codi de l'Àrea Bàsica de Serveis Socials|
 |DadesEspecifiques/IdRecurs | Llista d'identificadors interns de recursos del Hèstia separats per “,” (la coma). Si es desitja obtenir les dades d’un únic recurs, no cal indicar el separador “,”|
 
-## Resposta - dades específiques
+## 1.2. Resposta - dades específiques
 La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al document [Resposta_DadesEspecifiques_Recursos.xsd](xsd/Resposta_DadesEspecifiques_Recursos.xsd)
 
 ![Resposta_consulta_recursos.png](img/Resposta_consulta_recursos.png)
@@ -31,7 +31,7 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 |RespostaConsultaExpedients/Resultat/Descripcio | Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius|
 |RespostaConsultaExpedients/LlistaRecursos | Llista de recursos localitzats, apareixerà buida en cas d'error|
 
-###	LlistaRecursos/Recurs
+### 1.2.1. LlistaRecursos/Recurs
 ![Resposta_consulta_recursos_LlistaRecursos.png](img/Resposta_consulta_recursos_LlistaRecursos.png)
 
 |Element | Descripció|
@@ -90,7 +90,7 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 |//Recurs/Beneficiaris/Cognom1 | Primer cognom del beneficiari del recurs|
 |//Recurs/Beneficiaris/Cognom2 | Segon cognom del beneficiari del recurs|
 
-## Joc de proves
+## 1.3. Joc de proves
 El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
 
 |codINE | IdRecursos | Resultat|
@@ -101,7 +101,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 |9821920002	| 120000011 | (-2) No s'ha localitzat el recurs|
 |9821920002	| 370265943,490173328,490278541	| (0) Els recursos s'han localitzat correctament|
 
-## Petició d'exemple
+## 1.4. Petició d'exemple
 ```xml
 <soapenv:Envelope xmlns:nt="http://www.aocat.net/NT" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
@@ -146,7 +146,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 </soapenv:Envelope>
 ```
 
-## Resposta d'exemple
+## 1.5. Resposta d'exemple
 ```xml
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
    <S:Body>

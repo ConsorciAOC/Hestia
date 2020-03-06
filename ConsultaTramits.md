@@ -1,4 +1,4 @@
-# Consulta Tràmits (HESTIA_TRAMITS)
+# 1. Consulta Tràmits (HESTIA_TRAMITS)
 Els tràmits són els documents o formularis de sol·licitud que normalment cal omplir i presentar per tal de demanar una prestació. El programa Hèstia gestiona dos tipus de tràmits: 
 * *Propis*: sol·licituds generades, dissenyades i gestionades per la pròpia Àrea Bàsica de Serveis Socials.
 * *Generalitat*: sol·licituds generades i dissenyades pel Departament de Treball Afers Socials i Famílies.
@@ -11,7 +11,7 @@ S'ha de tenir en compte que actualment només es permet la consulta de tràmits 
 
 A continuació es detalla la missatgeria corresponent al bloc de dades específiques. 
 
-## Petició - dades específiques
+## 1.1. Petició - dades específiques
 La missatgeria específica de la petició *HESTIA_TRAMITS* es troba definida al document [Peticio_DadesEspecifiques_Tramits.xsd](xsd/Peticio_DadesEspecifiques_Tramits.xsd)
 
 ![Peticio_consulta_tramits.png](img/Peticio_consulta_tramits.png)
@@ -21,7 +21,7 @@ La missatgeria específica de la petició *HESTIA_TRAMITS* es troba definida al 
 |DadesEspecifiques/CodINE | Codi de l'Àrea Bàsica de Serveis Socials|
 |DadesEspecifiques/IdTramits | Llista d'identificadors interns de tràmits de l'Hèstia separats per “,” (la coma). Si es desitja obtenir les dades d’un únic tràmit, no cal indicar el separador “,”|
 
-## Resposta - dades específiques
+## 1.2. Resposta - dades específiques
 La missatgeria específica de la resposta *HESTIA_TRAMITS* es troba definida al document [Resposta_DadesEspecifiques_Tramits.xsd](xsd/Resposta_DadesEspecifiques_Tramits.xsd)
 
 ![Resposta_consulta_tramits.png](img/Resposta_consulta_tramits.png)
@@ -36,7 +36,7 @@ La missatgeria específica de la resposta *HESTIA_TRAMITS* es troba definida al 
 |RespostaConsultaTramits/Resultat/Descripcio | Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius|
 |RespostaConsultaTramits/LlistaTramits | Llista de tràmits localitzats, apareixerà buida en cas d'error|
 
-###	LlistaTramits/Tramit
+### 1.2.1. LlistaTramits/Tramit
 ![Resposta_consulta_tramits_LlistaTramits.png](img/Resposta_consulta_tramits_LlistaTramits.png)
 
 |Element | Descripció|
@@ -87,7 +87,7 @@ La missatgeria específica de la resposta *HESTIA_TRAMITS* es troba definida al 
 |//Tramit/Titular/Cognom2 | Segon cognom del titular|
 
 
-## Joc de proves
+## 1.3. Joc de proves
 El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
 
 |codINE | IdTramits | Resultat|
@@ -99,7 +99,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 |9821920002 | 490059660,370059167,490081695 | (0) Els tràmits s'han localitzat correctament|
 
 
-## Petició d'exemple
+## 1.4. Petició d'exemple
 ```xml
 <soapenv:Envelope xmlns:nt="http://www.aocat.net/NT" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
@@ -144,7 +144,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 </soapenv:Envelope>
 ```
 
-## Resposta d'exemple
+## 1.5. Resposta d'exemple
 ```xml
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
    <S:Body>

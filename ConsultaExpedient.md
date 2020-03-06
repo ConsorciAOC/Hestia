@@ -1,4 +1,4 @@
-# Consulta Expedient (HESTIA_EXPEDIENT)
+# 1. Consulta Expedient (HESTIA_EXPEDIENT)
 El servei **Hèstia** tracta l’Expedient Familiar com l’eina principal de treball dels professionals d’Atenció Primària: dóna suport per al treball directe dels casos, permet orientar els processos del sistema d’intervenció i agrupa tota la informació generada en una mateixa unitat de convivència (domicili).
 
 L'expedient engloba les dades descriptives del nucli familiar a gestionar, la llista de les persones vinculades i la seva relació dins l’expedient, dades de diagnòstic de la situació (demandes, problemàtiques), el registre temporalitzat de les avaluacions i actuacions dels professionals, els plans d’acció (plans d’intervenció), els tràmits (formularis de sol·licitud que cal omplir i presentar per demanar una prestació) i els recursos concedits.
@@ -11,7 +11,7 @@ Si no s’indica cap dels paràmetres, el connector retornarà un codi d’error
 S'ha de tenir en compte que actualment només es permet la consulta d’expedients de la pròpia ABSS que realitza la petició.
 A continuació es detalla la missatgeria corresponent al bloc de dades específiques. 
 
-## Petició - dades específiques
+## 1.1. Petició - dades específiques
 La missatgeria específica de la petició *HESTIA_EXPEDIENT* es troba definida al document [Peticio_DadesEspecifiques_Expedient.xsd](xsd/Peticio_DadesEspecifiques_Expedient.xsd)
 
 ![Peticio_consulta_expedient.png](img/Peticio_consulta_Expedient.png)
@@ -23,7 +23,7 @@ La missatgeria específica de la petició *HESTIA_EXPEDIENT* es troba definida a
 |DadesEspecifiques/NumExpedient | Número d’expedient utilitzat pels professionals de l’ABSS|
 |DadesEspecifiques/DNI | DNI, NIE o passaport de la persona vinculada a l'expedient.|
 
-## Resposta - dades específiques
+## 1.2. Resposta - dades específiques
 La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida al document [Resposta_DadesEspecifiques_Expedient.xsd](xsd/Resposta_DadesEspecifiques_Expedient.xsd)
 
 ![Resposta_consulta_expedient.png](img/Resposta_consulta_expedient.png)
@@ -38,7 +38,7 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |RespostaConsultaExpedients/Resultat/Descripcio | Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius|
 |RespostaConsultaExpedients/LlistaExpedients | Llista d’expedients localitzats, apareixerà buida en cas d'error o si no s’ha pogut localitzar l’expedient indicat. Normalment aquesta llista retornarà 1 únic expedient, ara bé, si es fa la cerca de l’expedient a partir del DNI/NIE/Passaport del ciutadà i aquest disposa de més d’un expedient obert en l’ABSS (situació que en principi no s’hauria de donar de forma habitual) llavors sí que es pot retornar una llista d’expedients|
 
-### LlistaExpedients/Expedient
+### 1.2.1. LlistaExpedients/Expedient
 ![Resposta_consulta_expedientLlistatExpedient.png](img/Resposta_consulta_expedientLlistatExpedient.png)
 
 ![Resposta_consulta_expedientLlistatExpedient2.png](img/Resposta_consulta_expedientLlistatExpedient2.png)
@@ -153,7 +153,7 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |//Expedient/Recursos | Llista de recursos en estat concedit vinculats a l'expedient|
 |//Expedient/Recursos/IdRecurs | Identificador únic del recurs associat a l'expedient. Aquest és l’identificador que s’ha d’utilitzar en la consulta *[HESTIA_RECURSOS](ConsultaRecursos.md)* si es vol obtenir els detalls del recurs|
 
-## Joc de proves
+## 1.3. Joc de proves
 El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
 
 |codINE | IdExpedient | NumExpedient | DNI | Resultat|
@@ -168,7 +168,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 |9821920002	| | EXP2017/00874 | | (0) Els expedients s'han localitzat correctament|
 |9821920002	| | | 00181584E | (0) Els expedients s'han localitzat correctament|
 
-## Petició d'exemple
+## 1.4. Petició d'exemple
 ```xml
 <soapenv:Envelope xmlns:nt="http://www.aocat.net/NT" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
@@ -214,7 +214,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 ```
 
 
-## Resposta d'exemple
+## 1.5. Resposta d'exemple
 ```xml
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
    <S:Body>

@@ -1,4 +1,4 @@
-# Consulta fitxa de persona (HESTIA_CONSULTA_CIUTADA)
+# 1. Consulta fitxa de persona (HESTIA_CONSULTA_CIUTADA)
 Aquesta operació permet consultar totes les dades disponibles d’un ciutadà a partir del seu identificador intern de l’**Hèstia**, NIF/NIE/Passaport o CIP (targeta sanitària). Es deu indicar obligatòriament el Codi de l'Àrea Bàsica de Serveis Socials on està ubicat el ciutadà i almenys uns dels 3 paràmetres d'identificació. En cas d’indicar més d’un paràmetre, el connector farà la següent priorització:
 1.	Si s’especifica l’identificador intern de l’**Hèstia**, el connector ignorarà la resta de paràmetres indicats i retornarà les dades del ciutadà a partir de l’identificador intern.
 2.	Si no s’indica l’identificador intern, i s’indica el NIF (també s’accepta NIE o passaport), el connector ignorarà el CIP indicat i retornarà les dades del ciutadà a partir del NIF (NIE o passaport).
@@ -7,7 +7,7 @@ Si no s’indica cap dels paràmetres, el connector retornarà un codi d’error
 S'ha de tenir en compte que actualment només es retornen dades de ciutadans que pertanyin a la pròpia ABSS que fa la consulta.
 A continuació es detalla la missatgeria corresponent al bloc de dades específiques. 
 
-## Petició - dades específiques
+## 1.1. Petició - dades específiques
 La missatgeria específica de la petició *HESTIA_CONSULTA_CIUTADA* es troba definida al document [Peticio_DadesEspecifiques_Ciutada.xsd](xsd/Peticio_DadesEspecifiques_Ciutada.xsd)
 
 ![Peticio_consulta_ciutada.png](img/Peticio_consulta_ciutada.png)
@@ -19,7 +19,7 @@ La missatgeria específica de la petició *HESTIA_CONSULTA_CIUTADA* es troba def
 |PCIConsultaCiutada/NIF | NIF, NIE o Passaport del ciutadà|
 |PCIConsultaCiutada/CIP | Codi d’identificació personal assignat per CatSalut|
 
-## Resposta - dades específiques
+## 1.2. Resposta - dades específiques
 La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba definida al document [Resposta_DadesEspecifiques_Ciutada.xsd](xsd/Resposta_DadesEspecifiques_Ciutada.xsd)
 
 ![Resposta_consulta_ciutada.png](img/Resposta_consulta_ciutada.png)
@@ -33,7 +33,7 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 | | 0: el ciutadà s'ha localitzat correctament. Les seves dades es retornen a l’apartat *ciutadà*|
 |PCIConsultaCiutadaResponse/PCIConsultaCiutadaResult/resultat/descripcio| Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius.|
 
-### ciutada/informacioBasica
+### 1.2.1. ciutada/informacioBasica
 ![Resposta_consulta_ciutada_informacioBasica1.png](img/Resposta_consulta_ciutada_informacioBasica1.png)
 
 ![Resposta_consulta_ciutada_informacioBasica2.png](img/Resposta_consulta_ciutada_informacioBasica2.png)
@@ -181,7 +181,7 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 
 <a id="noteNasciturus" href="#noteNasciturusref"><sup>2</sup></a> Terme jurídic per designar al ser humà des de que és concebut fins al seu naixement. Es refereix per tant al ser humà concebut i no nascut.
 
-### ciutada/informacioAmpliada
+### 1.2.2. ciutada/informacioAmpliada
 
 ![Resposta_consulta_ciutada_informacioBasica1.png](img/Resposta_consulta_ciutada_informacioBasica1.png)
 
@@ -301,7 +301,7 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 |//informacioAmpliada/dadesRegistre/idUsuariResponsable | Identificador del professional referent assignat al ciutadà|
 |//informacioAmpliada/dadesRegistre/nomUsuariResponsable | Nom del professional referent assignat al ciutadà|
 
-## Joc de proves
+## 1.3. Joc de proves
 El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
 
 |codiINE | idInternCiutada | NIF | CIP | Resultat|
@@ -319,7 +319,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 |9821920002	| | 00181584E | TASA9999999999 | (0)  El ciutadà s'ha localitzat correctament|
 
 
-## Petició d'exemple
+## 1.4. Petició d'exemple
 ```xml
 <soapenv:Envelope xmlns:nt="http://www.aocat.net/NT" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
@@ -363,7 +363,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
    </soapenv:Body>
 ```
 
-## Resposta d'exemple
+## 1.5. Resposta d'exemple
 ```xml
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
    <S:Body>
