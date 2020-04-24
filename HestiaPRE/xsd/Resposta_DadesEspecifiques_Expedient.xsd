@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- editado con XMLSpy v2020 sp1 (x64) (http://www.altova.com) por macarmona (personalextern) -->
+<xs:schema xmlns="http://www.aoc.cat/hestia" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.aoc.cat/hestia" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- ======================================================= -->
+	<!-- Consulta Expedients                                     -->
+	<!-- ======================================================= -->
+	<xs:element name="RespostaConsultaExpedients">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Resultat"/>
+				<xs:element ref="LlistaExpedients"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ======================================================= -->
+	<!-- Elements comuns                                         -->
+	<!-- ======================================================= -->
+	<xs:element name="Resultat">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CodiResultat" type="xs:string"/>
+				<xs:element name="Descripcio" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ======================================================= -->
+	<!-- Elements connector de Expedients                        -->
+	<!-- ======================================================= -->
+	<xs:element name="LlistaExpedients">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Expedient" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Expedient">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdExpedient" type="xs:int"/>
+				<xs:element name="NumExpedient" type="xs:string"/>
+				<xs:element name="IdEstat" type="xs:int"/>
+				<xs:element name="Estat" type="xs:string"/>
+				<xs:element name="DtEstat" type="xs:dateTime"/>
+				<xs:element name="IdSector" type="xs:int" minOccurs="0"/>
+				<xs:element name="Sector" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdSubsector" type="xs:int" minOccurs="0"/>
+				<xs:element name="Subsector" type="xs:string" minOccurs="0"/>
+				<xs:element name="NomFamiliar" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdProcedenciaDelCas" type="xs:int" minOccurs="0"/>
+				<xs:element name="ProcedenciaDelCas" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdTipusFamilia" type="xs:int" minOccurs="0"/>
+				<xs:element name="TipusFamilia" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdResidenciaFamiliar" type="xs:int" minOccurs="0"/>
+				<xs:element name="ResidenciaFamiliar" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdSituacioExpedient" type="xs:int" minOccurs="0"/>
+				<xs:element name="SituacioExpedient" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdGrauRisc" type="xs:int"/>
+				<xs:element name="GrauRisc" type="xs:string"/>
+				<xs:element name="IdEquipReferent" type="xs:int" minOccurs="0"/>
+				<xs:element name="EquipReferent" type="xs:string" minOccurs="0"/>
+				<xs:element name="ProfReferent" type="Professional"/>
+				<xs:element name="ProfCorreferent" type="Professional" minOccurs="0"/>
+				<xs:element name="ProfAlta" type="Professional"/>
+				<xs:element name="ProfMod" type="Professional" minOccurs="0"/>
+				<xs:element ref="Habitatge" minOccurs="0"/>
+				<xs:element ref="PersonesVinculades"/>
+				<xs:element ref="Tramits" minOccurs="0"/>
+				<xs:element ref="Recursos" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Professional">
+		<xs:sequence>
+			<xs:element name="DNIUsuari" type="xs:string" minOccurs="0"/>
+			<xs:element name="NomUsuari" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Habitatge">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdProvincia" type="xs:int" minOccurs="0"/>
+				<xs:element name="Provincia" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdMunicipi" type="xs:int" minOccurs="0"/>
+				<xs:element name="Municipi" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdTipusVia" type="xs:int" minOccurs="0"/>
+				<xs:element name="NomVia" type="xs:string" minOccurs="0"/>
+				<xs:element name="Numero" type="xs:string" minOccurs="0"/>
+				<xs:element name="CP" type="xs:string" minOccurs="0"/>
+				<xs:element name="LocalitatBarri" type="xs:string" minOccurs="0"/>
+				<xs:element name="Pis" type="xs:string" minOccurs="0"/>
+				<xs:element name="Porta" type="xs:string" minOccurs="0"/>
+				<xs:element name="Bloc" type="xs:string" minOccurs="0"/>
+				<xs:element name="Escala" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonesVinculades">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PersonaVinculada" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PersonaVinculada">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdPersona" type="xs:int"/>
+				<xs:element name="DNI" type="xs:string" minOccurs="0"/>
+				<xs:element name="Nom" type="xs:string"/>
+				<xs:element name="Cognom1" type="xs:string"/>
+				<xs:element name="Cognom2" type="xs:string" minOccurs="0"/>
+				<xs:element name="CIP" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdTipusRelacio" type="xs:int"/>
+				<xs:element name="TipusRelacio" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tramits">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdTramit" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Recursos">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdRecurs" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
