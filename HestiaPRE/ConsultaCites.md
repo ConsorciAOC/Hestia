@@ -1,15 +1,15 @@
-# 1. Consulta Cites(HESTIA_CITES)
+# 1. Consulta Cites Agenda (HESTIA_CITES)
 
 El servei **Hèstia** disposa d'un mòdul encarregat de gestionar l'agenda dels seus professionals. A través d'aquest mòdul és possible registrar cites entre els usuaris dels serveis socials i els professionals que els presten servei. Aquest connector ens permet obtenir les dades d'una o diverses cites donades d'alta en el sistema.
 
-Existeixen dues maneres de realitzar la consulta, en els dos casos és obligatori indicar del codi INE de l'ABSS (`CodINE`). El primer mètode de consulta consisteix a indicar una llista d'identificadors interns de l’**Hèstia** d'una o més cites (`IdCites`). Aquest mètode ens serà d'utilitat per a actualitzar la informació de les cites que han estat localitzades amb anterioritat a través del segon mètode de consulta. El límit màxim que es pot sol·licitar en una única petició és de 100 cites.
+Existeixen dues maneres de realitzar la consulta, en els dos casos és obligatori indicar del codi INE de l'ABSS (`CodINE`) que es vol consultar i únicament es retornaran cites d'aquesta ABSS. El primer mètode de consulta consisteix a indicar una llista d'identificadors interns de l’**Hèstia** d'una o més cites (`IdCites`). Aquest mètode ens serà d'utilitat per a actualitzar la informació de les cites que han estat localitzades amb anterioritat a través del segon mètode de consulta. El límit màxim que es pot sol·licitar en una única petició és de 100 cites.
 
-El segon mètode de consulta, és una cerca en l'agenda mitjançant en un rang de dates. Haurem d'indicar el paràmetre de data d'inici (`DataInici`) i el paràmetre de data de fi (`DataFi`). Com a màxim es permet sol·licitar les cites registrades en un rang de set dies. En el cas que vulguem limitar la cerca, tenim un paràmetre addicional (`IdProfessionals`) on podem indicar una llista de professionals per a restringir la nostra cerca. Com en la llista anterior, el límit màxim de professionals a filtrar no ha de ser superior a 100.
+El segon mètode de consulta, és una cerca en l'agenda mitjançant un rang de dates. Haurem d'indicar el paràmetre de data d'inici (`DataInici`) i el paràmetre de data de fi (`DataFi`). Com a màxim es permet sol·licitar les cites registrades en un rang de set dies. En el cas que vulguem limitar la cerca, tenim un paràmetre addicional (`IdProfessionals`) on podem indicar una llista de professionals per a restringir la nostra cerca. Com en la llista anterior, el límit màxim de professionals a filtrar serà de 100.
 
 En cas d’indicar més d’un paràmetre, el connector farà la següent priorització:
 
-1.	Si s'especifica una llista de cites  (`IdCites`), el connector ignorarà la resta dels paràmetres indicats i únicament retornarà les cites localitzades a partir del seu identificador intern dins l’**Hèstia**.
-2.	Si no s'indica una llista de cites, el connector retornarà totes cites registrades en l'agenda compreses entre la data d'inici (`DataInici`) i la data de fi (`DataFi`). En el cas que s'indiqui una llista d'identificadors interns de professionals (`IdProfessionals`), només es retornaran les cites del rang indicat que incloguin a algun d'aquests professionals com a assistents.
+1.	Si s'especifica una llista de cites  (`IdCites`), el connector ignorarà la resta dels paràmetres indicats i únicament retornarà les cites localitzades a partir del seu identificador intern dins l’**Hèstia**. Recorda però, que només es retornaran les cites que pertanyin a l'ABSS indicada (`CodINE`).
+2.	Si no s'indica una llista de cites, el connector retornarà totes les cites registrades en l'agenda de l'ABSS indicada (`CodINE`) compreses entre la data d'inici (`DataInici`) i la data de fi (`DataFi`). En el cas que s'indiqui una llista d'identificadors interns de professionals (`IdProfessionals`), només es retornaran les cites del rang indicat que incloguin a algun d'aquests professionals com a assistents.
 
 Si no s’indica cap dels paràmetres, el connector retornarà un codi d’error. S'ha de tenir en compte que actualment només es permet la consulta de les cites de la pròpia ABSS que realitza la petició.
 
@@ -29,7 +29,7 @@ La missatgeria específica de la petició *HESTIA_CITES* es troba definida al do
 | DadesEspecifiques/**IdCites**         | Llista d'Identificadors interns de les cites dins l’**Hèstia**. Aquest és el paràmetre que recomanem utilitzar sempre que sigui possible (especialment per consultes futures sobre una mateixa cita) |
 | DadesEspecifiques/**DataInici**       | Data inicial per a realitzar la consulta sobre les cites dins de l'agenda. El rang de dies permès no ha de superar els set dies |
 | DadesEspecifiques/**DataFi**          | Data final per a realitzar la consulta sobre les cites dins de l'agenda. El rang de dies permès no ha de superar els set dies |
-| DadesEspecifiques/**IdProfessionals** | Llista d'identificadors interns del professional dins l’**Hèstia**. Aquest paràmetre és opcional i en el cas d'aparèixer fita la cerca als professionals subministrats |
+| DadesEspecifiques/**IdProfessionals** | Llista d'identificadors interns del professional dins l’**Hèstia**. Aquest paràmetre és opcional i en el cas d'aparèixer restringeix la cerca als professionals indicats |
 
 ## 1.2. Resposta - dades específiques
 
@@ -65,8 +65,8 @@ La missatgeria específica de la resposta *HESTIA_CITES* es troba definida al do
 | //Cita/**Data**                                              | Data en la qual es realitza la cita                          |
 | //Cita/**HoraInici**                                         | Hora d'inici de la cita                                      |
 | //Cita/**HoraFi**                                            | Hora de fi de la cita                                        |
-| //Cita/**IdTipus**                                           | Identificador de la mena de cita que es realitza             |
-| //Cita/**Tipus**                                             | Descripció de la mena de cita que es realitza:               |
+| //Cita/**IdTipus**                                           | Identificador del tipus de cita que es realitza             |
+| //Cita/**Tipus**                                             | Descripció del tipus de cita que es realitza:               |
 |                                                              | 0: Sense assignar                                            |
 |                                                              | 1: Entrevista                                                |
 |                                                              | 2: Acompanyament                                             |
@@ -99,7 +99,7 @@ La missatgeria específica de la resposta *HESTIA_CITES* es troba definida al do
 | //Cita/**Espontania**                                        | Indica si la cita és de caràcter espontani:                  |
 |                                                              | 0: No                                                        |
 |                                                              | 1: Sí                                                        |
-| //Cita/**Repeticio**                                         | Indica si aquesta cita ha estat donada d'alta amb alguna mena de periodicitat en el calendari: |
+| //Cita/**Repeticio**                                         | Indica si aquesta cita ha estat donada d'alta de forma periòdica en l'agenda: |
 |                                                              | 0: No                                                        |
 |                                                              | 1: Sí                                                        |
 | //Cita/**IdSector**                                          | Identificador únic del sector al qual pertany la cita (primer nivell de la divisió territorial a la qual pertanyen la cita i que normalment es correspon amb el municipi) |
@@ -115,22 +115,22 @@ La missatgeria específica de la resposta *HESTIA_CITES* es troba definida al do
 | //Cita/AltaCita/ProfAlta/**IdProfessional**                  | Identificador dins l’**Hèstia** del professional que ha donat d'alta la cita |
 | //Cita/AltaCita/ProfAlta/**DNIUsuari**                       | DNI/NIE del professional que va donar d'alta la cita         |
 | //Cita/AltaCita/ProfAlta/**NomUsuari**                       | Nom del professional que va donar d'alta la cita             |
-| //Cita/**UltimaModificacioCita/**                            | Informació sobre l'última modificació que s'ha realitzat en la cita |
-| //Cita/UltimaModificacioCita/**DataModificacio**             | Data de l'última modificació que s'ha realitzat en la cita   |
-| //Cita/UltimaModificacioCita/**ProfModificacio/**            | Informació sobre el professional que ha realitzat l'última modificació en la cita |
-| //Cita/UltimaModificacioCita/ProfModificacio/ **IdProfessional** | Identificador dins l’Hèstia de l'últim professional que va modificar la cita |
-| //Cita/UltimaModificacioCita/ProfModificacio/ **DNIUsuari**  | DNI/NIE de l'últim professional que va modificar la cita     |
-| //Cita/UltimaModificacioCita/ProfModificacio/ **NomUsuari**  | Nom de l'últim professional que va modificar la cita         |
+| //Cita/**UltimaModificacioCita/**                            | Informació sobre la darrera modificació que s'ha realitzat en la cita |
+| //Cita/UltimaModificacioCita/**DataModificacio**             | Data de la darrera modificació que s'ha realitzat en la cita   |
+| //Cita/UltimaModificacioCita/**ProfModificacio/**            | Informació sobre el professional que ha realitzat la darrera modificació en la cita |
+| //Cita/UltimaModificacioCita/ProfModificacio/ **IdProfessional** | Identificador dins l’Hèstia del darrer professional que va modificar la cita |
+| //Cita/UltimaModificacioCita/ProfModificacio/ **DNIUsuari**  | DNI/NIE del darrer professional que va modificar la cita     |
+| //Cita/UltimaModificacioCita/ProfModificacio/ **NomUsuari**  | Nom del darrer professional que va modificar la cita         |
 | //Cita/**LlistaPersonesAssistents/**                         | Relació de persones convocades a la cita                     |
 | //Cita/LlistaPersonesAssistents/**PersonaAssistent/**        | Informació sobre la persona assistent a la cita              |
-| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **IdPersona** | Identificador intern dins l’Hèstia de la persona             |
-| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **DNI**    | DNI/NIE/Passaport de la persona                              |
+| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **IdPersona** | Identificador intern dins l’Hèstia de la persona assistent|
+| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **DNI**    | DNI/NIE/Passaport de la persona assistent                    |
 | //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Nom**    | Nom de la persona assistent                                  |
-| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Cognom1** | Primer cognom de la persona                                  |
-| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Cognom2** | Segon cognom de la persona                                   |
-| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Telefon** | Primer telèfon associat a la persona                         |
-| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Telefon2** | Segon telèfon associat a la persona                          |
-| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **CorreuElectronic** | Correu electrònic de contacte amb la persona                 |
+| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Cognom1** | Primer cognom de la persona assistent                       |
+| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Cognom2** | Segon cognom de la persona assistent                        |
+| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Telefon** | Primer telèfon associat a la persona assistent              |
+| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **Telefon2** | Segon telèfon associat a la persona assistent              |
+| //Cita/LlistaPersonesAssistents/PersonaAssistent/ **CorreuElectronic** | Correu electrònic de contacte de la persona assistent|
 | //Cita/**LlistaProfessionalsAssistents/**                    | Llista de professionals convocats a la cita                  |
 | //Cita/LlistaProfessionalsAssistents/ **ProfessionalAssistent/** | Informació del professional assistent a la cita              |
 | //Cita/LlistaProfessionalsAssistents/ ProfessionalAssistent/**IdProfessional** | Identificador intern dins l’Hèstia del professional          |
