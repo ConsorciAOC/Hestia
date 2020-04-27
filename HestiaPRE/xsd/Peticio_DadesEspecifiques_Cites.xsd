@@ -12,7 +12,7 @@
           </xs:annotation>
         </xs:element>
         <xs:choice>
-          <xs:element name="IdCitas" type="xs:string" minOccurs="1" maxOccurs="1">
+          <xs:element name="IdCites" type="xs:string" minOccurs="1" maxOccurs="1">
             <xs:annotation>
               <xs:documentation>Llista d'identificadors únics de les cites dins l’Hèstia</xs:documentation>
             </xs:annotation>

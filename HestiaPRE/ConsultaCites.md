@@ -2,13 +2,13 @@
 
 El servei **Hèstia** disposa d'un mòdul encarregat de gestionar l'agenda dels seus professionals. A través d'aquest mòdul és possible registrar cites entre els usuaris dels serveis socials i els professionals que els presten servei. Aquest connector ens permet obtenir les dades d'una o diverses cites donades d'alta en el sistema.
 
-Existeixen dues maneres de realitzar la consulta, en els dos casos és obligatori indicar del codi INE de l'ABSS (`CodINE`). El primer mètode de consulta consisteix a indicar una llista d'identificadors interns de l’**Hèstia** d'una o més cites (`IdCitas`). Aquest mètode ens serà d'utilitat per a actualitzar la informació de les cites que han estat localitzades amb anterioritat a través del segon mètode de consulta. El límit màxim que es pot sol·licitar en una única petició és de 100 cites.
+Existeixen dues maneres de realitzar la consulta, en els dos casos és obligatori indicar del codi INE de l'ABSS (`CodINE`). El primer mètode de consulta consisteix a indicar una llista d'identificadors interns de l’**Hèstia** d'una o més cites (`IdCites`). Aquest mètode ens serà d'utilitat per a actualitzar la informació de les cites que han estat localitzades amb anterioritat a través del segon mètode de consulta. El límit màxim que es pot sol·licitar en una única petició és de 100 cites.
 
 El segon mètode de consulta, és una cerca en l'agenda mitjançant en un rang de dates. Haurem d'indicar el paràmetre de data d'inici (`DataInici`) i el paràmetre de data de fi (`DataFi`). Com a màxim es permet sol·licitar les cites registrades en un rang de set dies. En el cas que vulguem limitar la cerca, tenim un paràmetre addicional (`IdProfessionals`) on podem indicar una llista de professionals per a restringir la nostra cerca. Com en la llista anterior, el límit màxim de professionals a filtrar no ha de ser superior a 100.
 
 En cas d’indicar més d’un paràmetre, el connector farà la següent priorització:
 
-1.	Si s'especifica una llista de cites  (`IdCitas`), el connector ignorarà la resta dels paràmetres indicats i únicament retornarà les cites localitzades a partir del seu identificador intern dins l’**Hèstia**.
+1.	Si s'especifica una llista de cites  (`IdCites`), el connector ignorarà la resta dels paràmetres indicats i únicament retornarà les cites localitzades a partir del seu identificador intern dins l’**Hèstia**.
 2.	Si no s'indica una llista de cites, el connector retornarà totes cites registrades en l'agenda compreses entre la data d'inici (`DataInici`) i la data de fi (`DataFi`). En el cas que s'indiqui una llista d'identificadors interns de professionals (`IdProfessionals`), només es retornaran les cites del rang indicat que incloguin a algun d'aquests professionals com a assistents.
 
 Si no s’indica cap dels paràmetres, el connector retornarà un codi d’error. S'ha de tenir en compte que actualment només es permet la consulta de les cites de la pròpia ABSS que realitza la petició.
@@ -26,7 +26,7 @@ La missatgeria específica de la petició *HESTIA_CITES* es troba definida al do
 | Element                               | Descripció                                                   |
 | ------------------------------------- | :----------------------------------------------------------- |
 | DadesEspecifiques/**CodINE**          | Codi de l'Àrea Bàsica de Serveis Socials                     |
-| DadesEspecifiques/**IdCitas**         | Llista d'Identificadors interns de les cites dins l’**Hèstia**. Aquest és el paràmetre que recomanem utilitzar sempre que sigui possible (especialment per consultes futures sobre una mateixa cita) |
+| DadesEspecifiques/**IdCites**         | Llista d'Identificadors interns de les cites dins l’**Hèstia**. Aquest és el paràmetre que recomanem utilitzar sempre que sigui possible (especialment per consultes futures sobre una mateixa cita) |
 | DadesEspecifiques/**DataInici**       | Data inicial per a realitzar la consulta sobre les cites dins de l'agenda. El rang de dies permès no ha de superar els set dies |
 | DadesEspecifiques/**DataFi**          | Data final per a realitzar la consulta sobre les cites dins de l'agenda. El rang de dies permès no ha de superar els set dies |
 | DadesEspecifiques/**IdProfessionals** | Llista d'identificadors interns del professional dins l’**Hèstia**. Aquest paràmetre és opcional i en el cas d'aparèixer fita la cerca als professionals subministrats |
