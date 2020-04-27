@@ -143,7 +143,7 @@ La missatgeria específica de la resposta *HESTIA_CITES* es troba definida al do
 
 El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
 
-| codINE     | IdCitas                         | DataInici                | DataFi                   | IdProfessionals                 | Resultat                                                     |
+| codINE     | IdCites                         | DataInici                | DataFi                   | IdProfessionals                 | Resultat                                                     |
 | ---------- | ------------------------------- | ------------------------ | ------------------------ | ------------------------------- | ------------------------------------------------------------ |
 | 999999999  |                                 |                          |                          |                                 | (-9) Només es pot accedir a informació de la pròpia ABSS que realitza la consulta |
 | 9821920002 | 999999999                       |                          |                          |                                 | (-2) No s'ha localitzat la cita                              |
@@ -190,7 +190,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                   <ns0:DatosEspecificos>
                      <DadesEspecifiques xmlns="http://www.aoc.cat/hestia/">
                         <CodINE>9821920002</CodINE>
-                        <IdCitas>841265254,841207329,841455818</IdCitas>
+                        <IdCites>841265254,841207329,841455818</IdCites>
                      </DadesEspecifiques>
                   </ns0:DatosEspecificos>
                </ns0:SolicitudTransmision>
