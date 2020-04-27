@@ -24,3 +24,6 @@ Consulta les dades d'una llista de recursos a partir dels seus identificadors ú
 
 ### 1.1.4. [Consulta tràmits (HESTIA_TRAMITS)](ConsultaTramits.md)
 Consulta les dades d'una llista de tràmits a partir dels seus identificadors únics.
+
+### 1.1.5. [Consulta cites agenda (HESTIA_CITES)](ConsultaCites.md)
+Consulta les cites de l'agenda.	
