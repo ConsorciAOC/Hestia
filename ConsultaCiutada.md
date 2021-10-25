@@ -321,7 +321,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 
 ## 1.4. Petició d'exemple
 ```xml
-<soapenv:Envelope xmlns:nt="http://www.aocat.net/NT" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+<soapenv:Envelope xmlns:nt="http://www.aocat.net/hestia/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
       <nt:procesa xmlns:nt="http://www.openuri.org/">
          <ns0:Peticion xmlns:ns0="http://gencat.net/scsp/esquemes/peticion">
