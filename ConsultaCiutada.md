@@ -183,9 +183,9 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 
 ### 1.2.2. ciutada/informacioAmpliada
 
-![Resposta_consulta_ciutada_informacioBasica1.png](img/Resposta_consulta_ciutada_informacioBasica1.png)
+![Resposta_consulta_ciutada_informacioAmpliada1.png](img/Resposta_consulta_ciutada_informacioAmpliada1.png)
 
-![Resposta_consulta_ciutada_informacioBasica2.png](img/Resposta_consulta_ciutada_informacioBasica2.png)
+![Resposta_consulta_ciutada_informacioAmpliada2.png](img/Resposta_consulta_ciutada_informacioAmpliada2.png)
 
 |Element | Descripció|
 |------- | ----------|
