@@ -31,3 +31,7 @@ Consulta les cites de l'agenda.
 ### 1.1.6. [Resolució de recursos (HESTIA_RESOLUCIORECURS)](ConsultaResoluciónRecursos.md)
 
 Resolució de recursos.	
+
+### 1.1.6. [GestionAvisos](GestionAvisos.md)
+
+Gestió d'avisos.	
