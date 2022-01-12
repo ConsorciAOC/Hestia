@@ -1,4 +1,4 @@
-# 1. Consulta fitxa de persona (HESTIA_CONSULTA_CIUTADA)
+# 	1. Consulta fitxa de persona (HESTIA_CONSULTA_CIUTADA)
 Aquesta operació permet consultar totes les dades disponibles d’un ciutadà a partir del seu identificador intern de l’**Hèstia**, NIF/NIE/Passaport o CIP (targeta sanitària). Es deu indicar obligatòriament el Codi de l'Àrea Bàsica de Serveis Socials on està ubicat el ciutadà i almenys uns dels 3 paràmetres d'identificació. En cas d’indicar més d’un paràmetre, el connector farà la següent priorització:
 1.	Si s’especifica l’identificador intern de l’**Hèstia**, el connector ignorarà la resta de paràmetres indicats i retornarà les dades del ciutadà a partir de l’identificador intern.
 2.	Si no s’indica l’identificador intern, i s’indica el NIF (també s’accepta NIE o passaport), el connector ignorarà el CIP indicat i retornarà les dades del ciutadà a partir del NIF (NIE o passaport).
@@ -73,6 +73,8 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 |//informacioBasica/dadesNaixement/descProvincia | Nom de la [província](Provincies.md) de naixement del ciutadà|
 |//informacioBasica/dadesNaixement/idMunicipi | Identificador del [municipi](Municipis.md) de naixement del ciutadà|
 |//informacioBasica/dadesNaixement/descMunicipi | Nom del [municipi](Municipis.md) de naixement del ciutadà|
+|//informacioBasica/dadesNaixement/IdNacionalitat | Identificador del [país](Paisos.md) de nacionalitat del ciutadà |
+|//informacioBasica/dadesNaixement/Nacionalitat | Nom del [país](Paisos.md) de nacionalitat del ciutadà |
 |//informacioBasica/dadesContacte/telefon1 | Telèfon principal del ciutadà|
 |//informacioBasica/dadesContacte/telefon2 | Telèfon secundari del ciutadà|
 |//informacioBasica/dadesContacte/email | Correu-e del ciutadà|
@@ -151,10 +153,17 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 | | 8: GRAU II|
 | | 9: GRAU III|
 |//informacioBasica/dependencia/expeDP | Número d’expedient de dependència|
+|//informacioBasica/dependencia/dataSolicitudPIA | Indica la data en la qual es va realitzar la sol·licitud PIA |
+|//informacioBasica/dependencia/dependenciaEnergetica | Indica si el ciutadà està afectat per una dependència energètica |
+| | No |
+| | Si |
 |//informacioBasica/discapacitat/discapacitat | Discapacitat:|
 | | 0: Sense discapacitat|
 | | 1: Amb discapacitat|
 |//informacioBasica/discapacitat/grauDiscapacitat | Grau de discapacitat (en percentatge)|
+|//informacioBasica/discapacitat/MobilitatReduida | Recull si el ciutadà té reconeguda mobilitat reduïda |
+| | No |
+| | Si |
 |//informacioBasica/idEstatCivil | Identificador de l’estat civil del ciutadà:|
 | | 1: No consta|
 | | 2: Parella estable|
@@ -187,6 +196,8 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 
 ![Resposta_consulta_ciutada_informacioAmpliada2.png](img/Resposta_consulta_ciutada_informacioAmpliada2.png)
 
+![Resposta_consulta_ciutada_informacioBasica2.1.png](img/Resposta_consulta_ciutada_informacioBasica2.1.png)
+
 |Element | Descripció|
 |------- | ----------|
 |//informacioAmpliada/activitatLaboral/idActivitatLaboral | Identificador de l’[activitat laboral](ActivitatLaboral.md) del ciutadà|
@@ -208,6 +219,26 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 | | 0: No|
 | | 1: Sí|
 |//informacioAmpliada/activitatLaboral/ingressos | Import de la font d’ingressos del ciutadà|
+|//informacioAmpliada/activitatLaboral/ViaPercepcio | Llista de les vies d'ingressos del ciutadà |
+|//informacioAmpliada/activitatLaboral/ViaPercepcio/ingres/TipusViaIngres | Descriptor del tipus de via d'ingrés |
+| | Treball |
+| | Atur |
+| | Atur->Subsidi |
+| | Atur->Prestació |
+| | Pensió |
+| | Pensió->Contributiva |
+| | Pensió->Contributiva->Jubilació |
+| | Pensió->Contributiva->Invalidesa |
+| | Pensió->Contributiva->Viudetat/Orfandat |
+| | Pensió->PNC |
+| | Pensió->PNC->Jubilació |
+| | Pensió->PNC->Invalidesa |
+| | Prestació per cuidador (Llei autonomia personal) |
+| | Prestació per fill a carrec |
+| | COSE |
+| | Renda garantida de ciutadania (abans RMI) |
+| | Conveni separació |
+| | Economia submergida |
 |//informacioAmpliada/dadesImmigrants/idSituacioLegal | Identificador de la situació legal del ciutadà:|
 | | 0: No consta|
 | | 1: Refugiats|
@@ -233,6 +264,8 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 |//informacioAmpliada/dadesImmigrants/pendentReagrupament/conjuge | El ciutadà està pendent de reagrupar el cònjuge:|
 | | 0: No|
 | | 1: Sí|
+| //informacioAmpliada/estudisIdiomes/IdCentreEnsenyament | Identificador del centre d'ensenyament. Llista pròpia de cada àrea bàsica |
+| //informacioAmpliada/estudisIdiomes/CentreEnsenyament | Nom del centre d'ensenyament |
 |//informacioAmpliada/estudisIdiomes/idHabilitatComunicativa | Identificador de l’habilitat comunicativa del ciutadà:|
 | | 0: No consta|
 | | 1: Bona capacitat de comunicació|
@@ -292,6 +325,8 @@ La missatgeria específica de la resposta *HESTIA_CONSULTA_CIUTADA* es troba def
 |//informacioAmpliada/estudisIdiomes/suport/personesAltres | El ciutadà rep el suport de persones o d’altres:|
 | | 0: No|
 | | 1: Sí|
+| //informacioAmpliada/salut/IdAreaBasicaSalut | Identificador d'àrea bàsica de salut. Llista pròpia de cada àrea bàsica |
+| //informacioAmpliada/salut/AreaBasicaSalut | Nom de l'àrea bàsica de salut |
 |//informacioAmpliada/dadesRegistre/dataAlta | Data i hora d’alta de la fitxa ampliada del ciutadà a l’Hèstia|
 |//informacioAmpliada/dadesRegistre/idUsuariAlta | Identificador del professional que va donar d’alta la fitxa ampliada del ciutadà a l’Hèstia|
 |//informacioAmpliada/dadesRegistre/nomUsuariAlta | Nom del professional que va donar d’alta la fitxa ampliada del ciutadà a l’Hèstia|

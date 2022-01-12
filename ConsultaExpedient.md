@@ -43,15 +43,28 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 
 ![Resposta_consulta_expedientLlistatExpedient2.png](img/Resposta_consulta_expedientLlistatExpedient2.png)
 
+![Resposta_consulta_expedientLlistatExpedient3.png](img/Resposta_consulta_expedientLlistatExpedient3.png)
+
 |Element | Descripció|
 |------- | ----------|
 |//Expedient/IdExpedient | Identificador intern de l’expedient dins l’Hèstia. Per a futures consultes es recomana emprar aquest identificador si es desitja consultar aquest expedient més endavant.|
 |//Expedient/NumExpedient | Número d’expedient utilitzat pels professionals de l’ABSS|
+|//Expedient/refExterna | Camp que poden completar els professionals, per a registrar un enllaç extern a l'expedient. |
 |//Expedient/IdEstat | Identificador intern de l'estat de l'expedient|
 |//Expedient/Estat | Estat en el qual es troba l'expedient:|
 | | 1: Obert|
 | | 2: Tancat|
 |//Expedient/DtEstat | Data en què l'expedient va entrar en l'estat actual|
+|//Expedient/IdMotiuTanca | Identificador del motiu de tancament de l'expedient. |
+|//Expedient/MotiuTanca | Descripció del motiu de tancament |
+| | 1: Absència de l'usuari |
+| | 2: Canvi de Domicili |
+| | 3: Decisió Professional |
+| | 4: Defunció |
+| | 5: Resolt |
+| | 6: Inactivitat de l'expedient |
+| | 7: Derivació |
+| | 8: Decisió de l'usuari |
 |//Expedient/IdSector | Identificador únic del sector al que pertany l’expedient (primer nivell de la divisió territorial a la que pertany l'expedient i que normalment es correspon amb el municipi)|
 |//Expedient/Sector | Descripció del sector al que pertany l'expedient|
 |//Expedient/IdSubsector | Identificador únic del subsector al que pertany l’expedient (segon nivell de la divisió territorial a la que pertany l'expedient i que normalment es correspon amb el barri)|
@@ -112,7 +125,7 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |//Expedient/ProfAlta/DNIUsuari | DNI/NIE del professional que va donar d'alta l'expedient|
 |//Expedient/ProfAlta/NomUsuari | Nom del professional que va donar d'alta l'expedient|
 |//Expedient/ProfMod/ | Darrer professional que va realitzar una modificació en l'expedient|
-|//Expedient/ProfMod/DNIUsuari | DNI/NIE del darrer professional que va realitzar una modificació| 
+|//Expedient/ProfMod/DNIUsuari | DNI/NIE del darrer professional que va realitzar una modificació|
 |//Expedient/ProfMod/NomUsuari | Nom del darrer professional que va realitzar una modificació|
 |//Expedient/Habitatge | Recull informació sobre l’habitatge de la unitat de convivència|
 |//Expedient/Habitatge/IdProvincia | Identificador de província on està situada l'habitatge|
@@ -128,6 +141,19 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |//Expedient/Habitatge/Porta | Porta de l'habitatge|
 |//Expedient/Habitatge/Bloc | Bloc de l’habitatge|
 |//Expedient/Habitatge/Escala | Escala de l‘habitatge|
+|//Expedient/Habitatge/IdRegim | Identificador del règim de tinença |
+|//Expedient/Habitatge/Regim | Règim de tinença |
+| | 1: Propietaris / Accès propietat |
+| | 2: Llogaters |
+| | 3: Habitatge Gratuït |
+| | 4: Alberg,pensió,hotel,residència |
+| | 6: Relloguer |
+| | 7: Règim de masover |
+| | 8: Ocupació il.legal |
+| | 9: NS/NC |
+| | 10: Lloguer sense contracte |
+| | 11: Relloguer lloguer |
+| | 12: Relloguer propietat |
 |//Expedient/PersonesVinculades | Relació de persones vinculades a l’expedient|
 |//Expedient/PersonesVinculades/PersonaVinculada | Dades del ciutadà vinculat a l'expedient|
 |//Expedient/PersonesVinculades/PersonaVinculada/IdPersona | Identificador intern dins l’Hèstia de la persona|
@@ -221,9 +247,9 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
       <ns0:procesaResponse xmlns:ns0="http://www.openuri.org/" xmlns:ns3="http://gencat.net/scsp/esquemes/respuesta" xmlns:ns2="http://gencat.net/scsp/esquemes/peticion">
          <ns3:Respuesta>
             <ns3:Atributos>
-               <ns3:IdPeticion>HESTIA_EXPEDIENT_e7bde47d-a102-4ded-8db5-c806d4fd6c37</ns3:IdPeticion>
+               <ns3:IdPeticion>HESTIA_EXPEDIENT_ad86a310-93fa-4982-8ab4-05a8bbdd49fe</ns3:IdPeticion>
                <ns3:NumElementos>1</ns3:NumElementos>
-               <ns3:TimeStamp>2020-03-06T12:49:41.773+01:00</ns3:TimeStamp>
+               <ns3:TimeStamp>2022-01-11T08:41:54.723+01:00</ns3:TimeStamp>
                <ns3:Estado>
                   <ns3:CodigoEstado>0003</ns3:CodigoEstado>
                   <ns3:LiteralError>OK</ns3:LiteralError>
@@ -258,6 +284,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                            <Expedient>
                               <IdExpedient>370034917</IdExpedient>
                               <NumExpedient>EXP2017/00874</NumExpedient>
+                              <refExterna>T3ST</refExterna>
                               <IdEstat>1</IdEstat>
                               <Estat>Obert</Estat>
                               <DtEstat>2017-04-06T12:32:38.45</DtEstat>
@@ -294,6 +321,8 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                               <Habitatge>
                                  <IdProvincia>27</IdProvincia>
                                  <Provincia>Lleida</Provincia>
+                                 <IdRegim>9</IdRegim>
+                                 <Regim>NS/NC</Regim>
                               </Habitatge>
                               <PersonesVinculades>
                                  <PersonaVinculada>

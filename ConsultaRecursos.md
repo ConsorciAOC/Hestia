@@ -62,6 +62,7 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 |//Recurs/Import | Import del recurs concedit|
 |//Recurs/DataInici | Data d'inici del recurs|
 |//Recurs/DataFins | Data de fi del recurs|
+|//Recurs/dataCreacio | Data de creació del recurs |
 |//Recurs/IdAmbit | Identificador de l'àmbit del recurs|
 |//Recurs/Ambit | Descripció de l’àmbit del recurs:|
 | | 0: Sense assignar|
@@ -79,7 +80,43 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 | | 12: Malalts terminals|
 | | 13: Altres grups situació necessitat|
 | | 14: Immigrants|
+|//Recurs/IdSAD | Identificador de SAD. Determina si el recurs retornat és de SAD i que tipus.|
+|//Recurs/SAD | Descripció de la mena de SAD:|
+| | 0: No SAD|
+| | 1: SAD Social|
+| | 2: SAD Dependència|
+|//Recurs/PobresaEnergetica | Recull dades si el recurs aquest associat a alguna mena de pobresa energètica.|
+|//Recurs/PobresaEnergetica/AltaExpedient | Alta expedient per pobresa energètica |
+| | 0: No|
+| | 1: Si|
+|//Recurs/PobresaEnergetica/AltaBeneficiaris | Alta beneficiaris per pobresa energètica |
+| | 0: No|
+| | 1: Si|
+|//Recurs/PobresaEnergetica/IdMensualitatsPendents | Identificador que indica si existeixen mensualitats pendents |
+|//Recurs/PobresaEnergetica/MensualitatsPendents | Descripció de mensualitat pendent|
+| | 0: Sense assignar|
+| | 1: Igual o inferior a 4 mensualitats|
+| | 2: Superior a 4 mensualitats|
+|//Recurs/PobresaEnergetica/AjudaAnyAnterior | Indica si ha tingut ajuda l'any anterior per a subministraments |
+| | 0: No|
+| | 1: Si|
+|//Recurs/PobresaEnergetica/IdCanalAcces | Identificador que defineix qual ha estat el canal d'accés al recurs |
+|//Recurs/PobresaEnergetica/CanalAcces | Descripció del canal d'accés|
+| | 0: Sense assignar|
+| | 1: Iniciativa de la persona/llar/família interessada|
+| | 2: Derivació d'una entitat del Tercer Sector|
+| | 3: Comunicació de la companyia subministradora|
+| | 4: Derivació de serveis de l'ens local o d'altres administracions públiques|
+|//Recurs/PobresaEnergetica/IdMotiuDenegacio | Indica en el cas de denegació com ha estat el motiu |
+|//Recurs/PobresaEnergetica/MotiuDenegacio | Descripció del motiu de denegació|
+| | 0: Sense assignar|
+| | 1: Denegació perquè supera els ingressos màxims establerts per rebre l'ajut|
+| | 2: Manca de pressupost de l'ens local|
+| | 3: Canvi de domicili de la persona/família interessada|
+| | 4: Impossibilitat de contactar amb la persona interessada|
+| | 5: Altres motius|
 |//Recurs/ProfAlta | Dades del professional que ha donat d'alta el recurs|
+|//Recurs/ProfAlta/IdUsuari | Identificador únic del professional |
 |//Recurs/ProfAlta/DNIUsuari | DNI/NIE del professional|
 |//Recurs/ProfAlta/NomUsuari | Nom del professional|
 |//Recurs/Beneficiaris | Llista de persones beneficiades del recurs|
@@ -153,9 +190,9 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
       <ns0:procesaResponse xmlns:ns0="http://www.openuri.org/" xmlns:ns3="http://gencat.net/scsp/esquemes/respuesta" xmlns:ns2="http://gencat.net/scsp/esquemes/peticion">
          <ns3:Respuesta>
             <ns3:Atributos>
-               <ns3:IdPeticion>HESTIA_RECURSOS_bac352c1-3921-4e5d-8a2c-d19544acaa06</ns3:IdPeticion>
+               <ns3:IdPeticion>HESTIA_RECURSOS_1ef5dedd-3774-4a84-a497-8942ba82c053</ns3:IdPeticion>
                <ns3:NumElementos>1</ns3:NumElementos>
-               <ns3:TimeStamp>2020-03-06T12:51:29.710+01:00</ns3:TimeStamp>
+               <ns3:TimeStamp>2021-12-31T10:58:56.214+01:00</ns3:TimeStamp>
                <ns3:Estado>
                   <ns3:CodigoEstado>0003</ns3:CodigoEstado>
                   <ns3:LiteralError>OK</ns3:LiteralError>
@@ -204,8 +241,22 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                               <Import>1</Import>
                               <DataInici>2008-06-13T00:00:00</DataInici>
                               <DataFi>1900-01-01T00:00:00</DataFi>
+                              <DataCreacio>2008-06-13T00:00:00</DataCreacio>
                               <IdAmbit>9</IdAmbit>
                               <Ambit>Marginats sense llar / transeünts</Ambit>
+                              <IdSAD>0</IdSAD>
+                              <SAD>No SAD</SAD>
+                              <PobresaEnergetica>
+                                 <AltaExpedient>0</AltaExpedient>
+                                 <AltaBeneficiaris>0</AltaBeneficiaris>
+                                 <IdMensualitatsPendents>0</IdMensualitatsPendents>
+                                 <MensualitatsPendents>Sense assignar</MensualitatsPendents>
+                                 <AjudaAnyAnterior>0</AjudaAnyAnterior>
+                                 <IdCanalAcces>0</IdCanalAcces>
+                                 <CanalAcces>Sense assignar</CanalAcces>
+                                 <IdMotiuDenegacio>0</IdMotiuDenegacio>
+                                 <MotiuDenegacio>Sense assignar</MotiuDenegacio>
+                              </PobresaEnergetica>
                               <Beneficiaris>
                                  <Beneficiari>
                                     <TitularBeneficiari>Titular</TitularBeneficiari>
@@ -234,9 +285,24 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                               <Import>0</Import>
                               <DataInici>2018-02-13T00:00:00</DataInici>
                               <DataFi>2018-03-13T00:00:00</DataFi>
+                              <DataCreacio>2018-02-12T17:57:51.723</DataCreacio>
                               <IdAmbit>9</IdAmbit>
                               <Ambit>Marginats sense llar / transeünts</Ambit>
+                              <IdSAD>0</IdSAD>
+                              <SAD>No SAD</SAD>
+                              <PobresaEnergetica>
+                                 <AltaExpedient>0</AltaExpedient>
+                                 <AltaBeneficiaris>0</AltaBeneficiaris>
+                                 <IdMensualitatsPendents>0</IdMensualitatsPendents>
+                                 <MensualitatsPendents>Sense assignar</MensualitatsPendents>
+                                 <AjudaAnyAnterior>0</AjudaAnyAnterior>
+                                 <IdCanalAcces>0</IdCanalAcces>
+                                 <CanalAcces>Sense assignar</CanalAcces>
+                                 <IdMotiuDenegacio>0</IdMotiuDenegacio>
+                                 <MotiuDenegacio>Sense assignar</MotiuDenegacio>
+                              </PobresaEnergetica>
                               <ProfAlta>
+                                 <IdUsuari>370000068</IdUsuari>
                                  <DNIUsuari>00001076H</DNIUsuari>
                                  <NomUsuari>ROSA SALGUERO AMAYA</NomUsuari>
                               </ProfAlta>
@@ -268,9 +334,24 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                               <Import>0</Import>
                               <DataInici>2018-09-19T00:00:00</DataInici>
                               <DataFi>2018-12-31T00:00:00</DataFi>
+                              <DataCreacio>2018-09-19T12:49:31.827</DataCreacio>
                               <IdAmbit>13</IdAmbit>
                               <Ambit>Altres grups situació necessitat</Ambit>
+                              <IdSAD>0</IdSAD>
+                              <SAD>No SAD</SAD>
+                              <PobresaEnergetica>
+                                 <AltaExpedient>0</AltaExpedient>
+                                 <AltaBeneficiaris>0</AltaBeneficiaris>
+                                 <IdMensualitatsPendents>0</IdMensualitatsPendents>
+                                 <MensualitatsPendents>Sense assignar</MensualitatsPendents>
+                                 <AjudaAnyAnterior>0</AjudaAnyAnterior>
+                                 <IdCanalAcces>0</IdCanalAcces>
+                                 <CanalAcces>Sense assignar</CanalAcces>
+                                 <IdMotiuDenegacio>0</IdMotiuDenegacio>
+                                 <MotiuDenegacio>Sense assignar</MotiuDenegacio>
+                              </PobresaEnergetica>
                               <ProfAlta>
+                                 <IdUsuari>370000051</IdUsuari>
                                  <DNIUsuari>00000543Z</DNIUsuari>
                                  <NomUsuari>JESSICA CONESA CASTAÑO</NomUsuari>
                               </ProfAlta>

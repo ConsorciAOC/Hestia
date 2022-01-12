@@ -52,16 +52,36 @@
 				<xs:element name="Import" type="xs:double"/>
 				<xs:element name="DataInici" type="xs:dateTime"/>
 				<xs:element name="DataFi" type="xs:dateTime"/>
+				<xs:element name="DataCreacio" type="xs:dateTime"/>
 				<xs:element name="IdAmbit" type="xs:int" minOccurs="0"/>
 				<xs:element name="Ambit" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdSAD" type="xs:int" minOccurs="0"/>
+				<xs:element name="SAD" type="xs:string" minOccurs="0"/>
+				<xs:element ref="PobresaEnergetica" minOccurs="0"/>
 				<xs:element ref="ProfAlta" minOccurs="0"/>
 				<xs:element ref="Beneficiaris"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PobresaEnergetica">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AltaExpedient" type="xs:int"/>
+				<xs:element name="AltaBeneficiaris" type="xs:int"/>
+				<xs:element name="IdMensualitatsPendents" type="xs:int"/>
+				<xs:element name="MensualitatsPendents" type="xs:string"/>
+				<xs:element name="AjudaAnyAnterior" type="xs:int"/>
+				<xs:element name="IdCanalAcces" type="xs:int"/>
+				<xs:element name="CanalAcces" type="xs:string"/>
+				<xs:element name="IdMotiuDenegacio" type="xs:int"/>
+				<xs:element name="MotiuDenegacio" type="xs:string"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ProfAlta">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element name="IdUsuari" type="xs:int"/>
 				<xs:element name="DNIUsuari" type="xs:string"/>
 				<xs:element name="NomUsuari" type="xs:string"/>
 			</xs:sequence>
@@ -87,3 +107,5 @@
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
+
+

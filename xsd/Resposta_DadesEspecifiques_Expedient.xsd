@@ -38,9 +38,12 @@
 			<xs:sequence>
 				<xs:element name="IdExpedient" type="xs:int"/>
 				<xs:element name="NumExpedient" type="xs:string"/>
+				<xs:element name="refExterna" type="xs:string" minOccurs="0"/>
 				<xs:element name="IdEstat" type="xs:int"/>
 				<xs:element name="Estat" type="xs:string"/>
 				<xs:element name="DtEstat" type="xs:dateTime"/>
+				<xs:element name="IdMotiuTanca" type="xs:int" minOccurs="0"/>
+				<xs:element name="MotiuTanca" type="xs:string" minOccurs="0"/>
 				<xs:element name="IdSector" type="xs:int" minOccurs="0"/>
 				<xs:element name="Sector" type="xs:string" minOccurs="0"/>
 				<xs:element name="IdSubsector" type="xs:int" minOccurs="0"/>
@@ -91,6 +94,8 @@
 				<xs:element name="Porta" type="xs:string" minOccurs="0"/>
 				<xs:element name="Bloc" type="xs:string" minOccurs="0"/>
 				<xs:element name="Escala" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdRegim" type="xs:int" minOccurs="0"/>
+				<xs:element name="Regim" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -130,3 +135,5 @@
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
+
+

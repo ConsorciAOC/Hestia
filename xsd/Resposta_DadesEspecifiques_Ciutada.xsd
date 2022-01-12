@@ -108,6 +108,8 @@
 				<xs:element name="descProvincia" type="xs:string" minOccurs="0"/>
 				<xs:element name="idMunicipi" type="xs:int" minOccurs="0"/>
 				<xs:element name="descMunicipi" type="xs:string" minOccurs="0"/>
+				<xs:element name="IdNacionalitat" type="xs:int" minOccurs="0"/>
+				<xs:element name="Nacionalitat" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -160,6 +162,8 @@
 				<xs:element name="dependent" type="xs:int" minOccurs="0"/>
 				<xs:element name="grauDependencia" type="xs:int" minOccurs="0"/>
 				<xs:element name="expeDP" type="xs:string" minOccurs="0"/>
+				<xs:element name="DataSolicitudPIA" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="DependenciaEnergetica" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -168,6 +172,7 @@
 			<xs:sequence>
 				<xs:element name="discapacitat" type="xs:int" minOccurs="0"/>
 				<xs:element name="grauDiscapacitat" type="xs:double" minOccurs="0"/>
+				<xs:element name="MobilitatReduida" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -180,6 +185,7 @@
 				<xs:element ref="activitatLaboral" minOccurs="0"/>
 				<xs:element ref="dadesImmigrants" minOccurs="0"/>
 				<xs:element ref="estudisIdiomes" minOccurs="0"/>
+				<xs:element ref="salut" minOccurs="0"/>
 				<xs:element ref="associacions" minOccurs="0"/>
 				<xs:element ref="suport" minOccurs="0"/>
 				<xs:element ref="dadesRegistre" minOccurs="0"/>
@@ -198,6 +204,21 @@
 				<xs:element name="ocupacioComptePropi" type="xs:int" minOccurs="0"/>
 				<xs:element name="ocupacioCompteAltre" type="xs:int" minOccurs="0"/>
 				<xs:element name="ingressos" type="xs:double" minOccurs="0"/>
+				<xs:element ref="ViaPercepcio" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ViaPercepcio">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ingres" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ingres">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TipusViaIngres" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -224,6 +245,8 @@
 	<xs:element name="estudisIdiomes">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element name="IdCentreEnsenyament" type="xs:int" minOccurs="0"/>
+				<xs:element name="CentreEnsenyament" type="xs:string" minOccurs="0"/>
 				<xs:element name="idHabilitatComunicativa" type="xs:int" minOccurs="0"/>
 				<xs:element name="idLlenguaMaterna" type="xs:int" minOccurs="0"/>
 				<xs:element name="descLlenguaMaterna" type="xs:string" minOccurs="0"/>
@@ -248,6 +271,14 @@
 				<xs:element name="parla" type="xs:int" minOccurs="0"/>
 				<xs:element name="llegeix" type="xs:int" minOccurs="0"/>
 				<xs:element name="escriu" type="xs:int" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="salut">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdAreaBasicaSalut" type="xs:int" minOccurs="0"/>
+				<xs:element name="AreaBasicaSalut" type="xs:string" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -288,3 +319,5 @@
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
+
+
