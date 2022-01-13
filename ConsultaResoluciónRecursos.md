@@ -1,11 +1,9 @@
-# 1. Resolució de recurs(HESTIA_RESOLUCIORECURS)
-Com a servei complementari al servei de consulta sobre els recursos se  subministra aquest servei. L'objectiu d'aquest servei és permetre la  modificació de l'estat d'un recurs de manera externa a l'aplicatiu de  l'Hèstia.
+# 1. Resolució de recurs (HESTIA_RESOLUCIORECURS)
+L'objectiu d'aquest servei és permetre l'actualització de l'estat d'un recurs de manera externa al servei Hèstia. Al procés de modificació de l'estat d'un recurs l'anomenem resolució del recurs. És important destacar que ##només es podran resoldre recursos d'ABSS que tinguin implementat i disponible el servei `Avís nou recurs` i que només es permetran actualitzar recursos associats a l'ABBS que realitza la petició.
 
-Per a poder realitzar l'actualització serà necessari indicar una sèrie  de paràmetres per a localitzar el recurs de manera unívoca. Serà obligatori indicar el codi INE de l'ABSS (`CodINE`), l'identificador intern de l'Hèstia del recurs (`IdRecurs`) i la tipologia del recurs a modificar (`IdTipusRecurs`).
+Per a poder realitzar l'actualització serà necessari indicar una sèrie  de paràmetres per a localitzar el recurs de manera unívoca. Serà obligatori indicar el codi INE de l'ABSS (`CodINE`), l'identificador intern del recurs a l'Hèstia (`IdRecurs`) i els camps del recurs que es desitgen actualitzar: l'estat del recurs (`EstatNou`), la data de finalització (`DataFins`) i l'import del recurs (`Import`). Finalment, caldrà informar l'identificador intern del professional (`IdUsuariModificacio`) i la data de l'operació (`DataModificacio`) per poder traçar i auditar la resolució. Tots aquests paràmetres indicats són obligatoris.
 
-La resta dels paràmetres es correspondran amb els valors que es desitja  actualitzar. Es podrà modificar l'identificador intern associat a  l'estat del recurs (`EstatNou`), canviar la data de finalització (`DataFins`) i l'import del recurs (`Import`). Finalment, per a dotar al sistema de  traçabilitat serà necessari indicar que professional realitza la  modificació i en quin moment, incloent-hi l'identificador intern del professional (`IdUsuariModificacio`) així com la data de modificació(`DataModificacio`).
-
-És necessari indicar que només es permetran modificar recursos associats a l'ABBS que realitza la petició. A més, tots els paràmetres són obligatoris.  Per tant, s'aconsella realitzar una consulta sobre el recurs abans de  realitzar l'actualització, amb la finalitat d'obtenir els valors actuals del recurs. D'aquesta manera es podrà enviar el valor que actualment té el recurs, si no es vol modificar algun dels valors.
+És necessari indicar que només es permetran actualitzar recursos associats a l'ABBS que realitza la petició. A més, tots els paràmetres són obligatoris.  Per tant, s'aconsella realitzar una consulta sobre el recurs abans de  realitzar l'actualització, amb la finalitat d'obtenir els valors actuals del recurs. D'aquesta manera es podrà enviar el valor que actualment té el recurs, si no es vol modificar algun dels valors.
 
 
 A continuació es detalla la missatgeria corresponent al bloc de dades específiques. 
