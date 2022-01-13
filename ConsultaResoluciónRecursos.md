@@ -1,5 +1,5 @@
 # 1. Resolució de recurs (HESTIA_RESOLUCIORECURS)
-L'objectiu d'aquest servei és permetre l'actualització de l'estat d'un recurs de manera externa al servei Hèstia. Al procés de modificació de l'estat d'un recurs l'anomenem resolució del recurs. És important destacar que ##només es podran resoldre recursos d'ABSS que tinguin implementat i disponible el servei `Avís nou recurs` i que només es permetran actualitzar recursos associats a l'ABBS que realitza la petició.
+L'objectiu d'aquest servei és permetre l'actualització de l'estat d'un recurs de manera externa al servei Hèstia. Al procés de modificació de l'estat d'un recurs l'anomenem resolució del recurs. És important destacar que <u>**només es podran resoldre recursos d'ABSS que tinguin implementat i disponible el servei [`Avís nou recurs`](GestionAvisos.md) **</u>  i que només es permetran actualitzar recursos associats a l'ABBS que realitza la petició.
 
 Per a poder realitzar l'actualització serà necessari indicar una sèrie  de paràmetres per a localitzar el recurs de manera unívoca. Serà obligatori indicar el codi INE de l'ABSS (`CodINE`), l'identificador intern del recurs a l'Hèstia (`IdRecurs`) i els camps del recurs que es desitgen actualitzar: l'estat del recurs (`EstatNou`), la data de finalització (`DataFins`) i l'import del recurs (`Import`). Finalment, caldrà informar l'identificador intern del professional que sol·licita l'operació (`IdUsuariModificacio`) i la data (`DataModificacio`) per poder traçar i auditar la resolució. 
 
@@ -40,9 +40,8 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 |RespostaConsultaRecursos/Resultat/CodiResultat | -1: La petició no és correcta o no compleix l’esquema|
 | | -2: Identificador de recurs no vàlid |
 | | -3: L'entitat no s'ha localitzat. No s'ha trobat l'entitat associada al codi d'àrea bàsica subministrat. |
-| | -4: El tipus del recurs no concorda. El tipus de recurs indicat no es correspon amb el del recurs a modificar. |
-| | -5: Professional no reconegut |
-| | -6: Estat invàlid |
+| | -4: Professional no reconegut |
+| | -5: Estat invàlid |
 | | -9: Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
 | | 0: Resolució del recurs <IdRecurs> reeixida |
 |RespostaConsultaExpedients/Resultat/Descripcio | Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius|
@@ -50,14 +49,13 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 ## 1.3. Joc de proves
 El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
 
-|codINE | IdRecurs | IdTipusRecurs | EstatNou | DataFins | Import | IdUsuariModificacio | DataModificacio | Resultat|
-|------ | ---------- | ------- |------ |------ |------ |------ |------ |------ |
-|999999999 | | | | | | | | (-9) Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
-|9821920002 | 100 | | | | | | | (-2)  Identificador de recurs no vàlid |
-|982192000	| 840447028	| 100	| 	| 	| 	| 	| 	| (-4) El tipus del recurs no concorda |
-|9821920002	| 840447028 | 370000146 | 1 | 2020-03-03T23:00:00.000 | 150.12 | 0 | 2020-03-03T23:00:00.000 | (-5) Professional no reconegut |
-|9821920002	| 840447028	| 370000146	| 100	| 2020-03-03T23:00:00.000	| 150.12	| 370000000	| 2020-03-03T12:08:52.000	| (6) Estat invàlid |
-|9821920002	| 840447028	| 370000146	| 1	| 2020-03-03T23:00:00.000	| 150.12	| 370000000	| 2020-03-03T12:08:52.000	| (0) Resolució del recurs 840447028 reeixida |
+|codINE | IdRecurs | EstatNou | DataFins | Import | IdUsuariModificacio | DataModificacio | Resultat|
+|------ | ---------- |------ |------ |------ |------ |------ |------ |
+|999999999 | | | | | | | (-9) Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
+|9821920002 | 100 | | | | | | (-2)  Identificador de recurs no vàlid |
+|9821920002	| 840447028 | 1 | 2020-03-03T23:00:00.000 | 150.12 | 0 | 2020-03-03T23:00:00.000 | (-4) Professional no reconegut |
+|9821920002	| 840447028	| 100	| 2020-03-03T23:00:00.000	| 150.12	| 370000000	| 2020-03-03T12:08:52.000	| (-5) Estat invàlid |
+|9821920002	| 840447028	| 1	| 2020-03-03T23:00:00.000	| 150.12	| 370000000	| 2020-03-03T12:08:52.000	| (0) Resolució del recurs 840447028 reeixida |
 
 ## 1.4. Petició d'exemple
 ```xml
@@ -94,7 +92,6 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                      <DadesEspecifiques xmlns="http://www.aoc.cat/hestia/">
                         <CodINE>9821920002</CodINE>
                         <IdRecurs>840447028</IdRecurs>
-                        <IdTipusRecurs>370000146</IdTipusRecurs>
                         <EstatNou>1</EstatNou>
                         <DataFins>2020-03-03T23:00:00.000</DataFins>
                         <Import>334.3</Import>
