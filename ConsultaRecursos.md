@@ -32,7 +32,7 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 |RespostaConsultaExpedients/LlistaRecursos | Llista de recursos localitzats, apareixerà buida en cas d'error|
 
 ### 1.2.1. LlistaRecursos/Recurs
-![Resposta_consulta_recursos_LlistaRecursos.png](img/Resposta_consulta_recursos_LlistaRecursos.png)
+![Resposta_consulta_recursos_LlistaRecursos.jpg](img/Resposta_consulta_recursos_LlistaRecursos.jpg)
 
 |Element | Descripció|
 |------- | ----------|
@@ -45,6 +45,7 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 | | 3: Desistiment|
 |//Recurs/IdExpedient | Identificador intern de l'expedient al que pertany el recurs|
 |//Recurs/NumExpedient | Número d’expedient al que pertany el recurs|
+|//Recurs/refExterna | Identificador del recurs en els sistemes propis de l'ABSS que es pot informar per facilitar la identificació del recurs en aquests sistemes d’informació aliens a l’Hèstia. |
 |//Recurs/IdTipusPrestacio | Identificador [del tipus de prestació](TipusRecurs.md)|
 |//Recurs/TipusPrestacio | Descripció del [tipus de prestació](TipusRecurs.md)|
 |//Recurs/IdSubtipus | Identificador del [subtipus de prestació](TipusRecurs.md)|
@@ -63,6 +64,7 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 |//Recurs/DataInici | Data d'inici del recurs|
 |//Recurs/DataFins | Data de fi del recurs|
 |//Recurs/dataCreacio | Data de creació del recurs |
+|//Recurs/IdTramit | En el cas que el recurs tingui algun tràmit associat aquest camp determina l'identificador de tràmit associat. |
 |//Recurs/IdAmbit | Identificador de l'àmbit del recurs|
 |//Recurs/Ambit | Descripció de l’àmbit del recurs:|
 | | 0: Sense assignar|
@@ -190,9 +192,9 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
       <ns0:procesaResponse xmlns:ns0="http://www.openuri.org/" xmlns:ns3="http://gencat.net/scsp/esquemes/respuesta" xmlns:ns2="http://gencat.net/scsp/esquemes/peticion">
          <ns3:Respuesta>
             <ns3:Atributos>
-               <ns3:IdPeticion>HESTIA_RECURSOS_1ef5dedd-3774-4a84-a497-8942ba82c053</ns3:IdPeticion>
+               <ns3:IdPeticion>HESTIA_RECURSOS_046d733a-794d-4231-ba42-cd2aca1a3d87</ns3:IdPeticion>
                <ns3:NumElementos>1</ns3:NumElementos>
-               <ns3:TimeStamp>2021-12-31T10:58:56.214+01:00</ns3:TimeStamp>
+               <ns3:TimeStamp>2022-01-13T16:41:30.765+01:00</ns3:TimeStamp>
                <ns3:Estado>
                   <ns3:CodigoEstado>0003</ns3:CodigoEstado>
                   <ns3:LiteralError>OK</ns3:LiteralError>
@@ -286,6 +288,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                               <DataInici>2018-02-13T00:00:00</DataInici>
                               <DataFi>2018-03-13T00:00:00</DataFi>
                               <DataCreacio>2018-02-12T17:57:51.723</DataCreacio>
+                              <IdTramit>490059658</IdTramit>
                               <IdAmbit>9</IdAmbit>
                               <Ambit>Marginats sense llar / transeünts</Ambit>
                               <IdSAD>0</IdSAD>
@@ -323,6 +326,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                               <Estat>Preassignat</Estat>
                               <IdExpedient>370034917</IdExpedient>
                               <NumExpedient>EXP2017/00874</NumExpedient>
+                              <refExterna>AXT-83432</refExterna>
                               <IdTipusPrestacio>370000144</IdTipusPrestacio>
                               <TipusPrestacio>1. PRESTACIONS DE SERVEIS</TipusPrestacio>
                               <IdSubtipus>370000137</IdSubtipus>
@@ -335,6 +339,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                               <DataInici>2018-09-19T00:00:00</DataInici>
                               <DataFi>2018-12-31T00:00:00</DataFi>
                               <DataCreacio>2018-09-19T12:49:31.827</DataCreacio>
+                              <IdTramit>490125520</IdTramit>
                               <IdAmbit>13</IdAmbit>
                               <Ambit>Altres grups situació necessitat</Ambit>
                               <IdSAD>0</IdSAD>
