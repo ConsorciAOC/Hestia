@@ -14,7 +14,7 @@ La missatgeria específica de la petició *HESTIA_CONSULTA_CIUTADA* es troba def
 
 |Element | Descripció|
 |------- | ----------|
-|PCIConsultaCiutada/codiINE | Codi de l'Àrea Bàsica de Serveis Socials|
+|PCIConsultaCiutada/codiINE | Codi INE de l'Àrea Bàsica de Serveis Socials |
 |PCIConsultaCiutada/idInternCiutada | Identificador únic del ciutadà dins l’Hèstia|
 |PCIConsultaCiutada/NIF | NIF, NIE o Passaport del ciutadà|
 |PCIConsultaCiutada/CIP | Codi d’identificació personal assignat per CatSalut|

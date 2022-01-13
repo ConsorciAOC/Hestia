@@ -1,4 +1,4 @@
-# 1. Resolució de recursos (HESTIA_RESOLUCIORECURS)
+# 1. Resolució de recurs(HESTIA_RESOLUCIORECURS)
 Com a servei complementari al servei de consulta sobre els recursos se  subministra aquest servei. L'objectiu d'aquest servei és permetre la  modificació de l'estat d'un recurs de manera externa a l'aplicatiu de  l'Hèstia.
 
 Per a poder realitzar l'actualització serà necessari indicar una sèrie  de paràmetres per a localitzar el recurs de manera unívoca. Serà obligatori indicar el codi INE de l'ABSS (`CodINE`), l'identificador intern de l'Hèstia del recurs (`IdRecurs`) i la tipologia del recurs a modificar (`IdTipusRecurs`).
@@ -19,7 +19,7 @@ La missatgeria específica de la petició *HESTIA_RESOLUCIORECURS* es troba defi
 
 |Element | Descripció|
 |------- | ----------|
-|DadesEspecifiques/CodINE | Codi de l'Àrea Bàsica de Serveis Socials|
+|DadesEspecifiques/CodINE | Codi INE de l'Àrea Bàsica de Serveis Socials |
 |DadesEspecifiques/IdRecurs | Identificador intern d'un recurs dins de l'Hèstia. |
 |DadesEspecifiques/IdTipusRecurs | Identificador del [tipus de recurs](TipusRecurs.md) dependent de l’ABSS |
 |DadesEspecifiques/EstatNou | Identificador del nou estat que es vol assignar al recurs |

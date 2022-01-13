@@ -18,7 +18,7 @@ La missatgeria específica de la petició *HESTIA_EXPEDIENT* es troba definida a
 
 |Element | Descripció|
 |------- | ----------|
-|DadesEspecifiques/CodINE | Codi de l'Àrea Bàsica de Serveis Socials|
+|DadesEspecifiques/CodINE | Codi INE de l'Àrea Bàsica de Serveis Socials |
 |DadesEspecifiques/IdExpedient | Identificador intern de l’expedient dins l’Hèstia. Aquest és el paràmetre que recomanem utilitzar sempre que sigui possible (especialment per consultes futures sobre un mateix expedient)|
 |DadesEspecifiques/NumExpedient | Número d’expedient utilitzat pels professionals de l’ABSS|
 |DadesEspecifiques/DNI | DNI, NIE o passaport de la persona vinculada a l'expedient.|
@@ -49,7 +49,7 @@ La missatgeria específica de la resposta *HESTIA_EXPEDIENT* es troba definida a
 |------- | ----------|
 |//Expedient/IdExpedient | Identificador intern de l’expedient dins l’Hèstia. Per a futures consultes es recomana emprar aquest identificador si es desitja consultar aquest expedient més endavant.|
 |//Expedient/NumExpedient | Número d’expedient utilitzat pels professionals de l’ABSS|
-|//Expedient/refExterna | Camp que poden completar els professionals, per a registrar un enllaç extern a l'expedient. |
+|//Expedient/refExterna | Identificador de l'expedient en els sistemes propis de l'ABSS que es pot informar per facilitar la identificació de l’expedient en aquests sistemes d’informació aliens a l’Hèstia. |
 |//Expedient/IdEstat | Identificador intern de l'estat de l'expedient|
 |//Expedient/Estat | Estat en el qual es troba l'expedient:|
 | | 1: Obert|

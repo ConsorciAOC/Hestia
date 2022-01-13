@@ -18,7 +18,7 @@ La missatgeria específica de la petició *HESTIA_TRAMITS* es troba definida al 
 
 |Element | Descripció|
 |------- | ----------|
-|DadesEspecifiques/CodINE | Codi de l'Àrea Bàsica de Serveis Socials|
+|DadesEspecifiques/CodINE | Codi INE de l'Àrea Bàsica de Serveis Socials |
 |DadesEspecifiques/IdTramits | Llista d'identificadors interns de tràmits de l'Hèstia separats per “,” (la coma). Si es desitja obtenir les dades d’un únic tràmit, no cal indicar el separador “,”|
 
 ## 1.2. Resposta - dades específiques

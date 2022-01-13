@@ -142,7 +142,7 @@ Tal com s'ha indicat prèviament la petició ha de ser enviada a través d'un to
 
 | Element                                    | Descripció                                                   |
 | ------------------------------------------ | :----------------------------------------------------------- |
-| EntradaRecursRequest/**CodINE**            | Codi de l'Àrea Bàsica de Serveis Socials                     |
+| EntradaRecursRequest/**CodINE**            | Codi INE de l'Àrea Bàsica de Serveis Socials                 |
 | EntradaRecursRequest/**IdUnicoRecurso**    | Identificador únic del recurs traspassat dins de l'Hèstia    |
 | EntradaRecursRequest/**IdTipoRecurso**     | Identificador únic de la tipologia del recurs traspassat dins de l'Hèstia |
 | EntradaRecursRequest/**IdProfesional**     | Identificador intern del professional que fes l'operació dins de l'Hèstia |

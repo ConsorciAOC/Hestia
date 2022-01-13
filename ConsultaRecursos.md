@@ -13,7 +13,7 @@ La missatgeria específica de la petició *HESTIA_RECURSOS* es troba definida al
 
 |Element | Descripció|
 |------- | ----------|
-|DadesEspecifiques/CodINE | Codi de l'Àrea Bàsica de Serveis Socials|
+|DadesEspecifiques/CodINE | Codi INE de l'Àrea Bàsica de Serveis Socials |
 |DadesEspecifiques/IdRecurs | Llista d'identificadors interns de recursos del Hèstia separats per “,” (la coma). Si es desitja obtenir les dades d’un únic recurs, no cal indicar el separador “,”|
 
 ## 1.2. Resposta - dades específiques

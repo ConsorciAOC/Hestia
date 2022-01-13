@@ -25,7 +25,7 @@ La missatgeria específica de la petició *HESTIA_CITES* es troba definida al do
 
 | Element                               | Descripció                                                   |
 | ------------------------------------- | :----------------------------------------------------------- |
-| DadesEspecifiques/**CodINE**          | Codi de l'Àrea Bàsica de Serveis Socials                     |
+| DadesEspecifiques/**CodINE**          | Codi INE de l'Àrea Bàsica de Serveis Socials                 |
 | DadesEspecifiques/**IdCites**         | Llista d'Identificadors interns de les cites dins l’**Hèstia**. Aquest és el paràmetre que recomanem utilitzar sempre que sigui possible (especialment per consultes futures sobre una mateixa cita) |
 | DadesEspecifiques/**DataInici**       | Data inicial per a realitzar la consulta sobre les cites dins de l'agenda. El rang de dies permès no ha de superar els set dies |
 | DadesEspecifiques/**DataFi**          | Data final per a realitzar la consulta sobre les cites dins de l'agenda. El rang de dies permès no ha de superar els set dies |
