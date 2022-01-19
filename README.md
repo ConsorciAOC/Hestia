@@ -32,7 +32,7 @@ Consulta les cites de l'agenda.
 
 Resolució de recurs.	
 
-### 1.1.6. [Avís nou recurs](GestionAvisos.md)
+### 1.1.6. [Avís nou recurs](AvisNouRecurs.md)
 
 Avís nou recurs.	
 
