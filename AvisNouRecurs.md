@@ -56,7 +56,7 @@ Un possible exemple de Token JWE seria:
 ```
 eyJhbGciOiJBMjU2R0NNS1ciLCJpdiI6ImkzcE5kMW01NU04Ymo1cnIiLCJ0YWciOiI4VDZyZ2lnNVJwQnROblBwTWJMVmFnIiwiZW5jIjoiQTI1NkdDTSIsImp0aSI6IjMyMTU2ODc1NTYiLCJpYXQiOjE2NDAyNDE3MjV9.Q723jUVrJx85NOi8pKcsGixvELDxfyxLP9Gj_8IGhco.tNJ0Qm5UyryrlQrX.ZfBbIohyTSG5yHACeEPhgk9WiLtk2HF9p2aZ0rsZvrt6khUP8_83Yw.oyW5I78IRC8lrr79tP5ZMg
 ```
-Si descodifiquem en base64 la capçalera JWE, que arriba fins al primer punt, veuríem:
+Si descodifiquem en base64 la capçalera JWE (que va des de l'inici fins al primer punt), veuríem:
 
 ```json
 {"alg":"A256GCMKW",
