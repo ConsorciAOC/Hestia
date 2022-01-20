@@ -1,65 +1,45 @@
 # 1. Introducció
-
-De manera addicional a les altres modalitats de consum ofertes pel servei Hèstia, es disposa d'un servei de gestió d'avisos. Aquest servei ofereix la  possibilitat d'obtenir avisos de manera asíncrona quan es produeixen esdeveniments dins de l'aplicació. 
-
-En aquesta modalitat d'avisos és el servei de l'Hèstia el que realitza una anomenada a una API Rest que ha de ser proporcionada per l'integrador. Aquesta API Rest pot estar implementada en el llenguatge de programació que l'integrador determini. No obstant això, ha de complir una sèrie de requisits perquè la comunicació sigui  possible. 
-
-Per a això, es fixa com a format d'intercanvi de dades JSON. A més, amb  la finalitat de protegir la transmissió de missatges es fixa com a canal de comunicació HTTPS i com a protocol de protecció del contingut dels missatges JWE (JSON Web Encryption).
-
-Per a encriptar els missatges a través de JWE serà necessari que l'integrador subministri una contrasenya robusta i  la comuniqui a través d'un canal segur. És important per a assegurar la  integritat del sistema que l'integrador implementi les mesures  necessàries per a evitar que es trenqui la cadena de custòdia.
-
-En qualsevol cas, encara que l'API ha de ser subministrada pel client,  aconsellem que el servei compleixi totes les mesures indicades per  l'Esquema Nacional de Seguretat (ENS).
-
-Dins de les modalitats d'avís disponibles en el servei, en l'actualitat només està disponible ENTRADA_RECURS. Aquest avís informés l'integrador del canvi d'estat d'una sèrie de recursos.
+Aquest és un connector conceptualment molt diferent a la resta de connectors de l'API de l'Hèstia. Es tracta d’un connector que requereix que cada ABSS que hi estigui interessada ho implementi i publiqui en el seu propi backoffice d’acord a les especificacions que aquí es detallen. Un cop estigui disponible aquest connector al backoffice de l’ABSS, s’haurà d’enregistrar a l’Hèstia per tal que es pugui consumir des de l’Hèstia de forma similar a una funció callback.
+L’objectiu d’aquest connector és informar a l’ABSS que s’ha donat d’alta un nou recurs a l’Hèstia, habitualment de caràcter econòmic, i bloquejar-ho a l’Hèstia per tal que es pugui realitzar la seva resolució (actualització de l’estat) des d’una eina externa integrant aquesta eina amb el connector [`Resolució de recurs`](ResolucioRecurs.md).
+Es tracta per tant d’un connector que haurà de publicar l’ABSS interessada a través d'un canal TLS 1.2 o superior, i que s'haurà d'implementar mitjançant una API REST i que l’Hèstia consumirà com a client. 
+En  aquest apartat es detallen els requeriments que ha de complir el connector que ha d’implementar l’ABSS per tal que l’Hèstia es pugui integrar. És important destacar però, que serà responsabilitat de l’ABSS implementar les mesures de seguretat necessàries per garantir en tot moment la confidencialitat i la integritat de les dades compartides pel connector.
 
 
-
-
-# 2. Estàndard de protecció per a l'enviament de missatges
-Per a garantir una transmissió segura entre servei de l'Hèstia i els integradors s'estableix com a protocol de protecció per als missatges l'estàndard JOSE (JSON Object Signing and Encryption). Aquesta norma proporciona un enfocament general per a signar i encriptar qualsevol tipus de contingut. Està concebuda per al seu ús en aplicacions web i està construïda sobre JSON i base64url.
-
-Aquest estàndard està compost per diversos RFCs. No obstant això, per a la codificació dels missatges ens restringirem a l'ús de JWE (JSON Web Encryption). Aquest estàndard se centra en l'encriptació de missatges i la seva comunicació. La seva norma queda recollida en:  https://tools.ietf.org/html/rfc7516.
-
-En l'elaboració dels missatges adoptarem com a algorisme criptogràfic per a protegir la clau xifrada AES GCM amb una contrasenya de 256-bit (A256GCMKW) i com a algorisme simètric per a protegir el text xifrat també AES GCM usant una clau de 256-bit (A256GCM). Sàrria necessària, com ja hem indicat, que l'integrador acordi contrasenya per a l'encriptació que haurà de ser subministrada al servei Hèstia través d'un canal segur.
-
-
+# 2. Requeriments de seguretat
+Per tal de garantir la confidencialitat, la integritat de les dades, així com per poder validar la identitat de l’aplicació integradora (l’Hèstia), és a dir, per tal de poder garantir una transmissió segura entre l’Hèstia i el connector **Avís de nou recurs** implementat per l’ABSS, el connector d’Avís de nou recurs s’haurà d’implementar segons l’estàndard JOSE (JSON Object Signing and Encryption), que defineix un marc general per a signar i xifrar qualsevol tipus de contingut en entorns web, i més concretament fent ús de l’especificació JWE (JSON Web Encryption) que es troba definida en el següent RFC: 
+https://tools.ietf.org/html/rfc7516.
+El xifrat de la missatgeria s’haurà de realitzar amb l’algoritme AES GCM amb una contrasenya de 256-bit (A256GC). Aquesta contrasenya serà proporcionada a l’ABSS per l’equip tècnic de l’Hèstia a través d'un canal segur.
 
 ## 2.1 JWE serialització compacta
-
-L'especificació JWE (JSON Web Encryption) estandarditza la manera de representar un contingut xifrat. Defineix  dues formes de serialització per a representar un missatge xifrat. Una  serialització compacta i una serialització en format JSON. Tots dos  formats comparteixen els mateixos fonaments criptogràfics. Encara que,  per a la comunicació amb el servei Hèstia ens restringirem a l'ús del format compacte. No descriurem el funcionament de JWE atès que estan àmpliament descrits en la norma. No obstant això, veurem alguns aspectes bàsics centrats en el format que genera.
-
-La serialització compacta de JWE es basa en l'enviament de la informació en format Token JWE. Aquest token es construeix a través de cinc components cadascun separat per un punt (.). Aquests components són: encapçalat JWE JOSE, clau xifrada JWE, vector d'inicialització JWE, text xifrat i etiqueta d'autenticació JWE.
-
-
+L'especificació JWE (JSON Web Encryption) estandarditza la manera de representar un contingut xifrat. Defineix dues formes de serialització per a representar un missatge xifrat. Una serialització compacta i una serialització en format JSON. Tots dos formats comparteixen els mateixos fonaments criptogràfics. Encara que, per a la comunicació amb el servei Hèstia ens restringirem a l'ús del format compacte. No descriurem el funcionament de JWE atès que estan àmpliament descrits en la norma. No obstant això, veurem alguns aspectes bàsics centrats en el format que genera.
+La serialització compacta de JWE es basa en l'enviament de la informació en format Token JWE. Aquest token es construeix a través de cinc apartats cadascun separat per un punt (.). Aquests apartats són: capçalera JWE JOSE, clau xifrada JWE, vector d'inicialització JWE, text xifrat i etiqueta d'autenticació JWE.
 
 ![JWE.png](img/JWE.png)
 
+A continuació detallem el contingut de cadascuna aquestes parts:
 
+1- Capçalera JWE: conté un JSON no encriptat en format BASE64. Aquest JSON s’utilitza per transmetre informació no sensible per part de l'emissor, però també serveix per definir les operacions criptogràfiques associades al Token JWE. Per a la implementació de JWE com a mínim ha de contenir: 
 
-Vegem succintament el contingut de cadascuna aquestes parts:
+* alg: indica l'algorisme criptogràfic utilitzat per a protegir la clau xifrada JWE.
+* enc: indica l'algorisme de xifratge simètric utilitzat per a protegir el text xifrat.
 
-1- L'encapçalat JWE: conté un JSON no encriptat formatat en BASE64. Aquest JSON es pot usar per a transmetre informació no sensible per part de  l'emissor. Però a més serveix per a definir les operacions  criptogràfiques associades al Token JWE. Per a la implementació de JWE almenys ha de contenir: 
+A més, depenent de l'algorisme de codificació utilitzat, pot ser necessari incloure el camp:
 
-* alg: identifica l'algorisme criptogràfic utilitzat per a protegir la clau xifrada JWE.
-* enc: identifica l'algorisme de xifratge simètric utilitzat per a protegir el text xifrat.
+* iv: indica el vector d'inicialització (*iv*) codificat en base64 per als algorismes de codificació que el requereixin. Aquest paràmetre és opcional.
 
-A més, depenent de l'algorisme de codificació poden ser necessari el camp:
+A banda d'aquests camps obligatoris, es poden afegir altres camps que poden resultar molt útils com:
 
-* iv: conté valor del vector d'inicialització (iv) codificat en base64 per als algorismes de codificació que el requereixin. Aquest paràmetre d'encapçalat és opcional.
-
-A part d'aquests valors, tal com ja hem comentat, pot contenir valors útils per al receptor indicats per l'emissor com:
-
-* jti: identificador únic (que pot servir per a realitzar una traçabilitat).
+* jti: identificador únic (que pot servir per enregistrar la traçabilitat de la petició).
 
 * iat: data de creació.
 
-2- Clau xifrada JWE: és la clau que es xifra amb la clau del destinatari desitjat i el  contingut xifrat resultant es registra com una matriu de bytes, que es  coneix com la clau xifrada de JWE. 
+2- Clau xifrada JWE: és la clau que es xifra amb la clau del destinatari i el contingut xifrat resultant es registra com una matriu de bytes, que es coneix com la clau xifrada de JWE. 
 
 3- Vector d'inicialització JWE: valor del vector d'inicialització utilitzat en xifrar el text sense format.
 
-4- Text xifrat JWE: resultat de xifrar el text. Aquest text pot estar formatat o no.
+4- Text xifrat JWE: resultat de xifrar el contingut del missatge. Aquest text pot estar formatat o no.
 
-5- Etiqueta d'autenticació JWE: depenent de l'algorisme de xifratge pot generar una etiqueta  d'autenticació que serveix per a garantir la integritat del text xifrat.
+5- Etiqueta d'autenticació JWE: depenent de l'algoritme de xifratge es pot generar una etiqueta d'autenticació que serveix per a garantir la integritat del text xifrat.
 
 
 
@@ -70,7 +50,7 @@ Un possible exemple de Token JWE seria:
 ```
 eyJhbGciOiJBMjU2R0NNS1ciLCJpdiI6ImkzcE5kMW01NU04Ymo1cnIiLCJ0YWciOiI4VDZyZ2lnNVJwQnROblBwTWJMVmFnIiwiZW5jIjoiQTI1NkdDTSIsImp0aSI6IjMyMTU2ODc1NTYiLCJpYXQiOjE2NDAyNDE3MjV9.Q723jUVrJx85NOi8pKcsGixvELDxfyxLP9Gj_8IGhco.tNJ0Qm5UyryrlQrX.ZfBbIohyTSG5yHACeEPhgk9WiLtk2HF9p2aZ0rsZvrt6khUP8_83Yw.oyW5I78IRC8lrr79tP5ZMg
 ```
-Si descodifiquem de base64 l'encapçalat JWE, que equivaldria fins al primer punt, contindria:
+Si descodifiquem en base64 la capçalera JWE, que arriba fins al primer punt, veuríem:
 
 ```json
 {"alg":"A256GCMKW",
@@ -82,10 +62,8 @@ Si descodifiquem de base64 l'encapçalat JWE, que equivaldria fins al primer pun
 ```
 
 
-
-
 ## 2.3 Implementacions suggerides
-La majoria de les llibreries existents ja s'encarreguen de generar els Token JWE d'una manera simple. Entre totes les implementacions existents se suggereix l'ús de les llibreries:
+La majoria de les llibreries JOSE-JWT existents permeten generar i validar de forma senzilla els Token JWE. Podem recomanar les següents llibreries:
 
 * Java: nimbus-jose-jwt
 * .NET: jose-jwt
@@ -93,16 +71,13 @@ La majoria de les llibreries existents ja s'encarreguen de generar els Token JWE
 
 
 ## 2.4 Protocol de comunicació
-
-L'API subministrada per l'integrador ha de contenir almenys un servei  que serà els responsables de rebre i tractar els avisos del servei Hèstia.
-
-
+A continuació mostrem un diagrama de seqüència on es detalla el flux que segueix una nova petició d'avís de nou recurs:
 
 ![ProtocoloCom.png](img/ProtocoloCom.png)
 
 
 
-**Pas 1 - ** El servei d'avisos rebrà un avís en format JSON.
+**Pas 1 - ** El servei d'avisos publicat per l'ABSS rep una nova petició en format JSON.
 
 **Pas 2 - ** El servei genera un token JWE utilitzant la contrasenya subministrada per l'integrador.
 
@@ -124,29 +99,20 @@ L'API subministrada per l'integrador ha de contenir almenys un servei  que serà
 
 
 
-# 3. Gestió d'avís
-
-Una vegada concret el protocol de comunicació en aquest punt ens centrarem en la missatgeria corresponent al mateix sistema de gestió d'avisos
-
+# 3. Avís nou recurs
+Una vegada explicats els requeriments de seguretat mínims que s'hauran d'implementar en aquest connector, anem a detallar pròpiament la missatgeria d'aquest:
 
 
-## 3.1. Avís ENTRADA_RECURS
-
-Ara com ara aquest és l'únic tipus d'avís possible. 
-
-### 3.1.1. Petició d'enviament
-
-Tal com s'ha indicat prèviament la petició ha de ser enviada a través d'un token JWE en aquest punt ens restringirem al contingut de la petició. Aquesta té complir el següent format JSON:
-
+### 3.1. Petició d'enviament
 ![Aviso ENTRADA_RECURSO.png](img/Aviso ENTRADA_RECURSO.png)
 
 | Element                                    | Descripció                                                   |
 | ------------------------------------------ | :----------------------------------------------------------- |
 | EntradaRecursRequest/**CodINE**            | Codi INE de l'Àrea Bàsica de Serveis Socials                 |
-| EntradaRecursRequest/**IdUnicoRecurso**    | Identificador únic del recurs traspassat dins de l'Hèstia    |
-| EntradaRecursRequest/**IdTipoRecurso**     | Identificador únic de la tipologia del recurs traspassat dins de l'Hèstia |
-| EntradaRecursRequest/**IdProfesional**     | Identificador intern del professional que fes l'operació dins de l'Hèstia |
-| EntradaRecursRequest/**NombreProfesional** | Nom del professional.                                        |
+| EntradaRecursRequest/**IdUnicoRecurso**    | Identificador únic del recurs donat d'alta a l'Hèstia        |
+| EntradaRecursRequest/**IdTipoRecurso**     | Tipus de recurs traspassat dins de l'Hèstia                  |
+| EntradaRecursRequest/**IdProfesional**     | Identificador del professional que ha donat d'alta el recurs |
+| EntradaRecursRequest/**NombreProfesional** | Nom del professional que ha donat d'alta el recurs           |
 
 Exemple de petició realitzada amb [Postman](https://www.postman.com/)
 
@@ -155,10 +121,7 @@ Exemple de petició realitzada amb [Postman](https://www.postman.com/)
 
 
 ### 3.1.2. Resposta
-Com a resultat de la crida el servei d'autenticació es retornarà en format JSON la següent estructura:
-
-
-
+El connector implementat per l'ABSS haurà de retornar la següent missatgeria de resposta:
 
 ![RespuestaAviso.png](img/RespuestaAviso.png)
 
@@ -166,8 +129,8 @@ Els possibles resultats són:
 
 |Element | Descripció|
 |------- | ----------|
-|EntradaRecursResponse/resultat/codiResultat | -1: La petició no és correcta o no compleix l’esquema|
-| | -2: Token no vàlid. El token subministrat no compleix l'esquema JWE o no es descodifica correctament. |
+|EntradaRecursResponse/resultat/codiResultat | -1: La petició no és vàlida. Operació no realitzada|
+| | -2: Token no vàlid. El token subministrat no és vàlid. Operació no realitzada |
 | | 0: Operació completada amb èxit. L'avís ha estat correctament tractat. |
 |EntradaRecursResponse/resultat/descripcio| Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius.|
 
@@ -175,7 +138,6 @@ Els possibles resultats són:
 Exemple de petició realitzada amb [Postman](https://www.postman.com/)
 
 ![RespuestaAvisoPostman.png](img/RespuestaAvisoPostman.png)
-
 
 
 ### 3.1.3.  Joc de proves
@@ -202,7 +164,6 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 ```
 
 
-
 ### 3.1.5.  Resposta d'exemple
 
 ```json
@@ -213,4 +174,3 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
     }
 }
 ```
-
