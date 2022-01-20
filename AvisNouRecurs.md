@@ -110,7 +110,8 @@ Una vegada explicats els requeriments de seguretat mínims que s'hauran d'implem
 
 
 ### 3.1. Petició d'enviament
-![Aviso ENTRADA_RECURSO.png](img/Aviso ENTRADA_RECURSO.png)
+Exemple de petició realitzada amb [Postman](https://www.postman.com/)
+![Peticio1.png](img/Peticio1.png)
 
 | Element                                    | Descripció                                                   |
 | ------------------------------------------ | :----------------------------------------------------------- |
@@ -120,16 +121,13 @@ Una vegada explicats els requeriments de seguretat mínims que s'hauran d'implem
 | EntradaRecursRequest/**IdProfesional**     | Identificador del professional que ha donat d'alta el recurs |
 | EntradaRecursRequest/**NomProfesional**    | Nom del professional que ha donat d'alta el recurs           |
 
-Exemple de petició realitzada amb [Postman](https://www.postman.com/)
-
-![Peticio1.png](img/Peticio1.png)
-
-
 
 ### 3.1.2. Resposta
 El connector implementat per l'ABSS haurà de retornar la següent missatgeria de resposta:
 
-![RespuestaAviso.png](img/RespuestaAviso.png)
+Exemple de petició realitzada amb [Postman](https://www.postman.com/)
+
+![RespuestaAvisoPostman.png](img/RespuestaAvisoPostman.png)
 
 Els possibles resultats són:
 
@@ -140,10 +138,6 @@ Els possibles resultats són:
 | | 0: Operació completada amb èxit. L'avís ha estat correctament tractat. |
 |EntradaRecursResponse/resultat/descripcio| Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius.|
 
-
-Exemple de petició realitzada amb [Postman](https://www.postman.com/)
-
-![RespuestaAvisoPostman.png](img/RespuestaAvisoPostman.png)
 
 
 ### 3.1.3.  Joc de proves
