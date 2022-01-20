@@ -118,7 +118,7 @@ Una vegada explicats els requeriments de seguretat mínims que s'hauran d'implem
 | EntradaRecursRequest/**IdUnicoRecurso**    | Identificador únic del recurs donat d'alta a l'Hèstia        |
 | EntradaRecursRequest/**IdTipoRecurso**     | Tipus de recurs traspassat dins de l'Hèstia                  |
 | EntradaRecursRequest/**IdProfesional**     | Identificador del professional que ha donat d'alta el recurs |
-| EntradaRecursRequest/**NombreProfesional** | Nom del professional que ha donat d'alta el recurs           |
+| EntradaRecursRequest/**NomProfesional**    | Nom del professional que ha donat d'alta el recurs           |
 
 Exemple de petició realitzada amb [Postman](https://www.postman.com/)
 
@@ -152,26 +152,24 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
 |CodINE |IdUnicoRecurso | IdTipoRecurso | IdProfesional | NombreProfesional | Token | Resultat|
 |------- | --------------- | --- | --- | --- | -------- |------- |
 | 9821920002	| 840998044	| 370000144 | 370000126 | MARIA COLLADO MARTÍNEZ | Ok | (0)  Operació completada amb èxit|
-| -1	| -1	| -1 | -1 | no vàlid | Ok | (-1) La petició no és correcta o no compleix l’esquema |
+| -1	| -1	| -1 | -1 | no vàlid | Ok | (-1) La petició no és vàlida. Operació no realitzada |
 | 9821920002	| 840998044	| 370000144 | 370000126 | MARIA COLLADO MARTÍNEZ | Invàlid | (-2) Token no vàlid|
 
 
 
 ### 3.1.4.  Petició d'exemple
-
 ```json
 {
     "CodINE": 9821920002,    
     "IdUnicoRecurso": 840998044,
     "IdTipoRecurso": 370000144,
     "IdProfesional": 370000126,
-    "NombreProfesional": "MARIA COLLADO MARTÍNEZ"
+    "NomProfesional": "MARIA COLLADO MARTÍNEZ"
 }
 ```
 
 
 ### 3.1.5.  Resposta d'exemple
-
 ```json
 {
     "resultat": {
