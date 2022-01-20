@@ -87,25 +87,25 @@ A continuació mostrem un diagrama de seqüència on es detalla el flux que segu
 
 
 
-**Pas 1 -** Un professional de l'ABSS A dona d'alta un nou recurs a l'Hèstiam, aquest recurs s'afegeix a la cua de recursos pendents d'avís i arriba el moment de processar aquest recurs. 
+**Pas 1 -** Un professional de l'ABSS *A* dona d'alta un nou recurs a l'Hèstia, aquest recurs s'afegeix a la cua de recursos pendents d'avís i arriba el moment de processar aquest recurs. 
 
-**Pas 2 -** L'Hèstia genera un token JWE utilitzant la contrasenya acordada amb l'ABSS A.
+**Pas 2 -** L'Hèstia genera un token JWE utilitzant la contrasenya acordada amb l'ABSS *A*.
 
-**Pas 3 -** L'Hèstia envia la petició d'avís de nou recurs per un canal TLS 1.2, o superior, al backoffice de l'ABSS A'integrador incloent el token JWE generat al pas 2.
+**Pas 3 -** L'Hèstia envia la petició d'avís de nou recurs per un canal TLS 1.2, o superior, al backoffice de l'ABSS *A* incloent el token JWE generat al pas 2.
 
-**Pas 4 -** El backoffice de l'ABSS A rep la petició que inclou el token JWE.
+**Pas 4 -** El backoffice de l'ABSS *A* rep la petició que inclou el token JWE.
 
-**Pas 5 -** L'ABSS A valida el token JWE utilitzant la seva contrasenya (la mateixa que l'Hèstia ha fet servir al pas 2).
+**Pas 5 -** L'ABSS *A* valida el token JWE utilitzant la seva contrasenya (la mateixa que l'Hèstia ha fet servir al pas 2).
 
-**Pas 6 -** L'ABSS A processa l'avís i genera un JSON de resposta.
+**Pas 6 -** L'ABSS *A* processa l'avís i genera un JSON de resposta.
 
-**Pas 7 -** L'ABSS codifica el JSON i genera un token JWE de resposta fent servir la seva contrasenya (la mateixa dels pasos 2 i 5).
+**Pas 7 -** L'ABSS *A* codifica el JSON i genera un token JWE de resposta fent servir la seva contrasenya (la mateixa dels passos 2 i 5).
 
-**Pas 8 -** L'ABSS retorna la resposta a l'Hèstia.
+**Pas 8 -** L'ABSS *A* retorna la resposta a l'Hèstia.
 
-**Pas 9 -** L'Hèstia valida el token JWE fent servir la contrasenya de l'ABSS A (la mateixa dels pasos 2, 5 i 7).
+**Pas 9 -** L'Hèstia valida el token JWE fent servir la contrasenya de l'ABSS A (la mateixa dels passos 2, 5 i 7).
 
-**Pas 10 -** L'Hèstia elimina el recurs de la cua de pendents d'avís.
+**Pas 10 -** Si tot és correcte, l'Hèstia elimina el recurs de la cua de pendents d'avís. En cas contrari, s'executarà la política de reintents en uns minuts.
 
 
 
