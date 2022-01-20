@@ -1,17 +1,22 @@
 # 1. Introducció
 Aquest és un connector conceptualment molt diferent a la resta de connectors de l'API de l'Hèstia. Es tracta d’un connector que requereix que cada ABSS que hi estigui interessada ho implementi i publiqui en el seu propi backoffice d’acord a les especificacions que aquí es detallen. Un cop estigui disponible aquest connector al backoffice de l’ABSS, s’haurà d’enregistrar a l’Hèstia per tal que es pugui consumir des de l’Hèstia de forma similar a una funció callback.
+
 L’objectiu d’aquest connector és informar a l’ABSS que s’ha donat d’alta un nou recurs a l’Hèstia, habitualment de caràcter econòmic, i bloquejar-ho a l’Hèstia per tal que es pugui realitzar la seva resolució (actualització de l’estat) des d’una eina externa integrant aquesta eina amb el connector [`Resolució de recurs`](ResolucioRecurs.md).
 Es tracta per tant d’un connector que haurà de publicar l’ABSS interessada a través d'un canal TLS 1.2 o superior, i que s'haurà d'implementar mitjançant una API REST i que l’Hèstia consumirà com a client. 
+
 En  aquest apartat es detallen els requeriments que ha de complir el connector que ha d’implementar l’ABSS per tal que l’Hèstia es pugui integrar. És important destacar però, que serà responsabilitat de l’ABSS implementar les mesures de seguretat necessàries per garantir en tot moment la confidencialitat i la integritat de les dades compartides pel connector.
 
 
 # 2. Requeriments de seguretat
 Per tal de garantir la confidencialitat, la integritat de les dades, així com per poder validar la identitat de l’aplicació integradora (l’Hèstia), és a dir, per tal de poder garantir una transmissió segura entre l’Hèstia i el connector **Avís de nou recurs** implementat per l’ABSS, el connector d’Avís de nou recurs s’haurà d’implementar segons l’estàndard JOSE (JSON Object Signing and Encryption), que defineix un marc general per a signar i xifrar qualsevol tipus de contingut en entorns web, i més concretament fent ús de l’especificació JWE (JSON Web Encryption) que es troba definida en el següent RFC: 
+
 https://tools.ietf.org/html/rfc7516.
+
 El xifrat de la missatgeria s’haurà de realitzar amb l’algoritme AES GCM amb una contrasenya de 256-bit (A256GC). Aquesta contrasenya serà proporcionada a l’ABSS per l’equip tècnic de l’Hèstia a través d'un canal segur.
 
 ## 2.1 JWE serialització compacta
 L'especificació JWE (JSON Web Encryption) estandarditza la manera de representar un contingut xifrat. Defineix dues formes de serialització per a representar un missatge xifrat. Una serialització compacta i una serialització en format JSON. Tots dos formats comparteixen els mateixos fonaments criptogràfics. Encara que, per a la comunicació amb el servei Hèstia ens restringirem a l'ús del format compacte. No descriurem el funcionament de JWE atès que estan àmpliament descrits en la norma. No obstant això, veurem alguns aspectes bàsics centrats en el format que genera.
+
 La serialització compacta de JWE es basa en l'enviament de la informació en format Token JWE. Aquest token es construeix a través de cinc apartats cadascun separat per un punt (.). Aquests apartats són: capçalera JWE JOSE, clau xifrada JWE, vector d'inicialització JWE, text xifrat i etiqueta d'autenticació JWE.
 
 ![JWE.png](img/JWE.png)
