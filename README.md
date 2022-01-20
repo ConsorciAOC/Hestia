@@ -29,7 +29,7 @@ Consulta les dades d'una llista de tràmits a partir dels seus identificadors ú
 Consulta les cites de l'agenda.	
 
 ### 1.1.6. [Avís nou recurs](AvisNouRecurs.md)
-Proporciona al backoffice de l'ABSS un avís, similar a una funció callback, cada vegada que es dona d'alta un nou recurs a l'Hèstia.
+Proporciona al backoffice de l'ABSS un avís, de forma similar a una funció callback, cada vegada que es dona d'alta un nou recurs a l'Hèstia.
 
 ### 1.1.7. [Resolució de recurs (HESTIA_RESOLUCIORECURS)](ResolucioRecurs.md)
 Permet realitzar l'actualització de l'estat (resolució) d'un recurs de manera externa al servei Hèstia.	
