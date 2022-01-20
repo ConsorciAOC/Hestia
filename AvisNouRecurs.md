@@ -2,9 +2,10 @@
 Aquest és un connector conceptualment molt diferent a la resta de connectors de l'API de l'Hèstia. Es tracta d’un connector que requereix que cada ABSS que hi estigui interessada ho implementi i publiqui en el seu propi backoffice d’acord a les especificacions que aquí es detallen. Un cop estigui disponible aquest connector al backoffice de l’ABSS, s’haurà d’enregistrar a l’Hèstia per tal que es pugui consumir des de l’Hèstia de forma similar a una funció callback.
 
 L’objectiu d’aquest connector és informar a l’ABSS que s’ha donat d’alta un nou recurs a l’Hèstia, habitualment de caràcter econòmic, i bloquejar-ho a l’Hèstia per tal que es pugui realitzar la seva resolució (actualització de l’estat) des d’una eina externa integrant aquesta eina amb el connector [`Resolució de recurs`](ResolucioRecurs.md).
-Es tracta per tant d’un connector que haurà de publicar l’ABSS interessada a través d'un canal TLS 1.2 o superior, i que s'haurà d'implementar mitjançant una API REST i que l’Hèstia consumirà com a client. 
+Es tracta per tant d’un connector que haurà de publicar l’ABSS interessada a través d'un canal TLS 1.2 o superior, i que s'haurà d'implementar mitjançant una API REST implementada amb el llenguatge de programació que desitgi l'ABSS. L’Hèstia per la seva banda consumirà aquest connector com a client. 
 
 En  aquest apartat es detallen els requeriments que ha de complir el connector que ha d’implementar l’ABSS per tal que l’Hèstia es pugui integrar. És important destacar però, que serà responsabilitat de l’ABSS implementar les mesures de seguretat necessàries per garantir en tot moment la confidencialitat i la integritat de les dades compartides pel connector.
+
 
 
 # 2. Requeriments de seguretat
