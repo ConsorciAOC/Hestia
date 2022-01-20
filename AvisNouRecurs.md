@@ -9,11 +9,11 @@ En  aquest apartat es detallen els requeriments que ha de complir el connector q
 
 
 # 2. Requeriments de seguretat
-Per tal de garantir la confidencialitat, la integritat de les dades, així com per poder validar la identitat de l’aplicació integradora (l’Hèstia), és a dir, per tal de poder garantir una transmissió segura entre l’Hèstia i el connector **Avís de nou recurs** implementat per l’ABSS, el connector d’Avís de nou recurs s’haurà d’implementar segons l’estàndard JOSE (JSON Object Signing and Encryption), que defineix un marc general per a signar i xifrar qualsevol tipus de contingut en entorns web, i més concretament fent ús de l’especificació JWE (JSON Web Encryption) que es troba definida en el següent RFC: 
+Per tal de garantir la confidencialitat, la integritat de les dades, així com per poder validar la identitat de l’aplicació integradora (l’Hèstia), és a dir, per tal de poder garantir una transmissió segura entre l’Hèstia i el connector **Avís de nou recurs**, l'ABSS haurà d’implementar-ho segons l’estàndard *JOSE* (*JSON Object Signing and Encryption*), que defineix un marc general per a signar i xifrar qualsevol tipus de contingut en entorns web, i més concretament fent ús de l’especificació *JWE* (*JSON Web Encryption*) que es troba definida en el següent RFC: 
 
 https://tools.ietf.org/html/rfc7516.
 
-El xifrat de la missatgeria s’haurà de realitzar amb l’algoritme AES GCM amb una contrasenya de 256-bit (A256GC). Aquesta contrasenya serà proporcionada a l’ABSS per l’equip tècnic de l’Hèstia a través d'un canal segur.
+El xifrat de la missatgeria s’haurà de realitzar amb l’algoritme *AES GCM* amb una contrasenya de 256-bit (*A256GC*). Aquesta contrasenya serà proporcionada a l’ABSS per l’equip tècnic de l’Hèstia a través d'un canal segur.
 
 ## 2.1 JWE serialització compacta
 L'especificació JWE (JSON Web Encryption) estandarditza la manera de representar un contingut xifrat. Defineix dues formes de serialització per a representar un missatge xifrat. Una serialització compacta i una serialització en format JSON. Tots dos formats comparteixen els mateixos fonaments criptogràfics. Encara que, per a la comunicació amb el servei Hèstia ens restringirem a l'ús del format compacte. No descriurem el funcionament de JWE atès que estan àmpliament descrits en la norma. No obstant això, veurem alguns aspectes bàsics centrats en el format que genera.
