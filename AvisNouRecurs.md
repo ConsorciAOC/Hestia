@@ -87,25 +87,25 @@ A continuació mostrem un diagrama de seqüència on es detalla el flux que segu
 
 
 
-**Pas 1 -** El servei d'avisos publicat per l'ABSS rep una nova petició en format JSON.
+**Pas 1 -** Un professional de l'ABSS A dona d'alta un nou recurs a l'Hèstiam, aquest recurs s'afegeix a la cua de recursos pendents d'avís i arriba el moment de processar aquest recurs. 
 
-**Pas 2 -** El servei genera un token JWE utilitzant la contrasenya subministrada per l'integrador.
+**Pas 2 -** L'Hèstia genera un token JWE utilitzant la contrasenya acordada amb l'ABSS A.
 
-**Pas 3 -** El servei envia una petició HTTPS a l'integrador amb el token JWE enviat.
+**Pas 3 -** L'Hèstia envia la petició d'avís de nou recurs per un canal TLS 1.2, o superior, al backoffice de l'ABSS A'integrador incloent el token JWE generat al pas 2.
 
-**Pas 4 -** L'integrador rep el token.
+**Pas 4 -** El backoffice de l'ABSS A rep la petició que inclou el token JWE.
 
-**Pas 5 -** L'integrador descodifica el token JWE utilitzant la seva contrasenya.
+**Pas 5 -** L'ABSS A valida el token JWE utilitzant la seva contrasenya (la mateixa que l'Hèstia ha fet servir al pas 2).
 
-**Pas 6 -** L'integrador gestiona l'avís i genera un JSON de resposta.
+**Pas 6 -** L'ABSS A processa l'avís i genera un JSON de resposta.
 
-**Pas 7 -** L'integrador codifica el JSON en un token JWE a través de la seva contrasenya.
+**Pas 7 -** L'ABSS codifica el JSON i genera un token JWE de resposta fent servir la seva contrasenya (la mateixa dels pasos 2 i 5).
 
-**Pas 8 -** L'integrador envia el token resultant al sistema d'avisos.
+**Pas 8 -** L'ABSS retorna la resposta a l'Hèstia.
 
-**Pas 9 -** El servei descodifica el token.
+**Pas 9 -** L'Hèstia valida el token JWE fent servir la contrasenya de l'ABSS A (la mateixa dels pasos 2, 5 i 7).
 
-**Pas 10 -** El servei gestiona el JSON resultant.
+**Pas 10 -** L'Hèstia elimina el recurs de la cua de pendents d'avís.
 
 
 
