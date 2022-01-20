@@ -28,11 +28,8 @@ Consulta les dades d'una llista de tràmits a partir dels seus identificadors ú
 ### 1.1.5. [Consulta cites agenda (HESTIA_CITES)](ConsultaCites.md)
 Consulta les cites de l'agenda.	
 
-### 1.1.6. [Resolució de recurs (HESTIA_RESOLUCIORECURS)](ResolucioRecurs.md)
-
-Resolució de recurs.	
-
 ### 1.1.6. [Avís nou recurs](AvisNouRecurs.md)
+Proporcionar al backoffice de l'ABSS un avís, similar a una funció callback, cada vegada que es dona d'alta un nou recurs a l'Hèstia.
 
-Avís nou recurs.	
-
+### 1.1.7. [Resolució de recurs (HESTIA_RESOLUCIORECURS)](ResolucioRecurs.md)
+Permet realitzar l'actualització de l'estat (resolució) d'un recurs de manera externa al servei Hèstia.	
