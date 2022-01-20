@@ -8,12 +8,15 @@ En  aquest apartat es detallen els requeriments que ha de complir el connector q
 
 
 
+
 # 2. Requeriments de seguretat
 Per tal de garantir la confidencialitat, la integritat de les dades, així com per poder validar la identitat de l’aplicació integradora (l’Hèstia), és a dir, per tal de poder garantir una transmissió segura entre l’Hèstia i el connector **Avís de nou recurs**, l'ABSS haurà d’implementar-ho segons l’estàndard *JOSE* (*JSON Object Signing and Encryption*), que defineix un marc general per a signar i xifrar qualsevol tipus de contingut en entorns web, i més concretament fent ús de l’especificació *JWE* (*JSON Web Encryption*) que es troba definida en el següent RFC: 
 
 https://tools.ietf.org/html/rfc7516.
 
 El xifrat de la missatgeria s’haurà de realitzar amb l’algoritme *AES GCM* amb una contrasenya de 256-bit (*A256GC*). Aquesta contrasenya serà proporcionada a l’ABSS per l’equip tècnic de l’Hèstia a través d'un canal segur.
+
+
 
 ## 2.1 JWE serialització compacta
 L'especificació JWE (JSON Web Encryption) estandarditza la manera de representar un contingut xifrat. Defineix dues formes de serialització per a representar un missatge xifrat. Una serialització compacta i una serialització en format JSON. Tots dos formats comparteixen els mateixos fonaments criptogràfics. Encara que, per a la comunicació amb el servei Hèstia ens restringirem a l'ús del format compacte. No descriurem el funcionament de JWE atès que estan àmpliament descrits en la norma. No obstant això, veurem alguns aspectes bàsics centrats en el format que genera.
@@ -24,28 +27,28 @@ La serialització compacta de JWE es basa en l'enviament de la informació en fo
 
 A continuació detallem el contingut de cadascuna aquestes parts:
 
-1- Capçalera JWE: conté un JSON no encriptat en format BASE64. Aquest JSON s’utilitza per transmetre informació no sensible per part de l'emissor, però també serveix per definir les operacions criptogràfiques associades al Token JWE. Per a la implementació de JWE com a mínim ha de contenir: 
+**1- Capçalera JWE**: conté un JSON no encriptat en format BASE64. Aquest JSON s’utilitza per transmetre informació no sensible per part de l'emissor, però també serveix per definir les operacions criptogràfiques associades al Token JWE. Per a la implementació de JWE com a mínim ha de contenir: 
 
-* alg: indica l'algorisme criptogràfic utilitzat per a protegir la clau xifrada JWE.
-* enc: indica l'algorisme de xifratge simètric utilitzat per a protegir el text xifrat.
+* **alg**: indica l'algorisme criptogràfic utilitzat per a protegir la clau xifrada JWE.
+* **enc**: indica l'algorisme de xifratge simètric utilitzat per a protegir el text xifrat.
 
 A més, depenent de l'algorisme de codificació utilitzat, pot ser necessari incloure el camp:
 
-* iv: indica el vector d'inicialització (*iv*) codificat en base64 per als algorismes de codificació que el requereixin. Aquest paràmetre és opcional.
+* **iv**: indica el vector d'inicialització (*iv*) codificat en base64 per als algorismes de codificació que el requereixin. Aquest paràmetre és opcional.
 
 A banda d'aquests camps obligatoris, es poden afegir altres camps que poden resultar molt útils com:
 
-* jti: identificador únic (que pot servir per enregistrar la traçabilitat de la petició).
+* **jti**: identificador únic (que pot servir per enregistrar la traçabilitat de la petició).
 
-* iat: data de creació.
+* **iat**: data de creació.
 
-2- Clau xifrada JWE: és la clau que es xifra amb la clau del destinatari i el contingut xifrat resultant es registra com una matriu de bytes, que es coneix com la clau xifrada de JWE. 
+**2- Clau xifrada JWE**: és la clau que es xifra amb la clau del destinatari i el contingut xifrat resultant es registra com una matriu de bytes, que es coneix com la clau xifrada de JWE. 
 
-3- Vector d'inicialització JWE: valor del vector d'inicialització utilitzat en xifrar el text sense format.
+**3- Vector d'inicialització JWE**: valor del vector d'inicialització utilitzat en xifrar el text sense format.
 
-4- Text xifrat JWE: resultat de xifrar el contingut del missatge. Aquest text pot estar formatat o no.
+**4- Text xifrat JWE**: resultat de xifrar el contingut del missatge. Aquest text pot estar formatat o no.
 
-5- Etiqueta d'autenticació JWE: depenent de l'algoritme de xifratge es pot generar una etiqueta d'autenticació que serveix per a garantir la integritat del text xifrat.
+**5- Etiqueta d'autenticació JWE**: depenent de l'algoritme de xifratge es pot generar una etiqueta d'autenticació que serveix per a garantir la integritat del text xifrat.
 
 
 
@@ -68,40 +71,42 @@ Si descodifiquem en base64 la capçalera JWE (que va des de l'inici fins al prim
 ```
 
 
+
 ## 2.3 Implementacions suggerides
 La majoria de les llibreries JOSE-JWT existents permeten generar i validar de forma senzilla els Token JWE. Podem recomanar les següents llibreries:
 
-* Java: nimbus-jose-jwt
-* .NET: jose-jwt
+* **Java**: nimbus-jose-jwt
+* **.NET**: jose-jwt
 
 
 
 ## 2.4 Protocol de comunicació
 A continuació mostrem un diagrama de seqüència on es detalla el flux que segueix una nova petició d'avís de nou recurs:
 
-![ProtocoloCom.png](img/ProtocoloCom.png)
+![Protocol_JWE.png](img/Protocol_JWE.png)
 
 
 
-**Pas 1 - ** El servei d'avisos publicat per l'ABSS rep una nova petició en format JSON.
+**Pas 1 -** El servei d'avisos publicat per l'ABSS rep una nova petició en format JSON.
 
-**Pas 2 - ** El servei genera un token JWE utilitzant la contrasenya subministrada per l'integrador.
+**Pas 2 -** El servei genera un token JWE utilitzant la contrasenya subministrada per l'integrador.
 
-**Pas 3 - ** El servei envia una petició HTTPS a l'integrador amb el token JWE enviat.
+**Pas 3 -** El servei envia una petició HTTPS a l'integrador amb el token JWE enviat.
 
-**Pas 4 - ** L'integrador rep el token.
+**Pas 4 -** L'integrador rep el token.
 
-**Pas 5 - ** L'integrador descodifica el token JWE utilitzant la seva contrasenya.
+**Pas 5 -** L'integrador descodifica el token JWE utilitzant la seva contrasenya.
 
-**Pas 6 - ** L'integrador gestiona l'avís i genera un JSON de resposta.
+**Pas 6 -** L'integrador gestiona l'avís i genera un JSON de resposta.
 
-**Pas 7 - ** L'integrador codifica el JSON en un token JWE a través de la seva contrasenya.
+**Pas 7 -** L'integrador codifica el JSON en un token JWE a través de la seva contrasenya.
 
-**Pas 8 - ** L'integrador envia el token resultant al sistema d'avisos.
+**Pas 8 -** L'integrador envia el token resultant al sistema d'avisos.
 
-**Pas 9 - ** El servei descodifica el token.
+**Pas 9 -** El servei descodifica el token.
 
-**Pas 10 - ** El servei gestiona el JSON resultant.
+**Pas 10 -** El servei gestiona el JSON resultant.
+
 
 
 
@@ -109,9 +114,11 @@ A continuació mostrem un diagrama de seqüència on es detalla el flux que segu
 Una vegada explicats els requeriments de seguretat mínims que s'hauran d'implementar en aquest connector, anem a detallar pròpiament la missatgeria d'aquest:
 
 
+
 ### 3.1. Petició d'enviament
 Exemple de petició realitzada amb [Postman](https://www.postman.com/)
-![Peticio1.png](img/Peticio1.png)
+
+![Peticio_AvisNouRecurs.png](img/Peticio_AvisNouRecurs.png)
 
 | Element                                    | Descripció                                                   |
 | ------------------------------------------ | :----------------------------------------------------------- |
@@ -122,21 +129,22 @@ Exemple de petició realitzada amb [Postman](https://www.postman.com/)
 | EntradaRecursRequest/**NomProfesional**    | Nom del professional que ha donat d'alta el recurs           |
 
 
+
 ### 3.1.2. Resposta
 El connector implementat per l'ABSS haurà de retornar la següent missatgeria de resposta:
 
-Exemple de petició realitzada amb [Postman](https://www.postman.com/)
+Exemple de resposta realitzada amb [Postman](https://www.postman.com/)
 
-![RespuestaAvisoPostman.png](img/RespuestaAvisoPostman.png)
+![Resposta_AvisNouRecurs.png](img/Resposta_AvisNouRecurs.png)
 
 Els possibles resultats són:
 
 |Element | Descripció|
 |------- | ----------|
-|EntradaRecursResponse/resultat/codiResultat | -1: La petició no és vàlida. Operació no realitzada|
+|EntradaRecursResponse/resultat/**codiResultat** | -1: La petició no és vàlida. Operació no realitzada|
 | | -2: Token no vàlid. El token subministrat no és vàlid. Operació no realitzada |
 | | 0: Operació completada amb èxit. L'avís ha estat correctament tractat. |
-|EntradaRecursResponse/resultat/descripcio| Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius.|
+|EntradaRecursResponse/resultat/**descripcio**| Missatge descriptiu del resultat de l’operació. En cas d’error es detallen els motius.|
 
 
 
@@ -161,6 +169,7 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
     "NomProfesional": "MARIA COLLADO MARTÍNEZ"
 }
 ```
+
 
 
 ### 3.1.5.  Resposta d'exemple
