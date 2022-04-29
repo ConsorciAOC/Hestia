@@ -127,7 +127,7 @@ Exemple de petició realitzada amb [Postman](https://www.postman.com/)
 | EntradaRecursRequest/**IdTipoRecurso**     | Tipus de recurs traspassat dins de l'Hèstia                  |
 | EntradaRecursRequest/**IdProfesional**     | Identificador del professional que ha donat d'alta el recurs |
 | EntradaRecursRequest/**NomProfesional**    | Nom del professional que ha donat d'alta el recurs           |
-
+| EntradaRecursRequest/**NomExpediente**     | Expedient en el qual s'ha donat d'alta el recurs             |
 
 
 ### 3.1.2. Resposta
