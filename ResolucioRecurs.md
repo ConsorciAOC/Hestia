@@ -1,7 +1,7 @@
 # 1. Resolució de recurs (HESTIA_RESOLUCIORECURS)
 L'objectiu d'aquest servei és permetre l'actualització de l'estat d'un recurs de manera externa al servei Hèstia. Al procés de modificació de l'estat d'un recurs l'anomenem resolució del recurs. És important destacar que **només es podran resoldre recursos d'ABSS que tinguin implementat i disponible el servei** [`Avís nou recurs`](AvisNouRecurs.md) i que només es permetran actualitzar recursos associats a l'ABBS que realitza la petició.
 
-Per a poder realitzar l'actualització serà necessari indicar una sèrie  de paràmetres per a localitzar el recurs de manera unívoca. Serà obligatori indicar el codi INE de l'ABSS (`CodINE`), l'identificador intern del recurs a l'Hèstia (`IdRecurs`) i els camps del recurs que es desitgen actualitzar: l'estat del recurs (`EstatNou`), la data de finalització (`DataFins`) i l'import del recurs (`Import`). Finalment, caldrà informar l'identificador intern del professional que sol·licita l'operació (`IdUsuariModificacio`) i la data (`DataModificacio`) per poder traçar i auditar la resolució. 
+Per a poder realitzar l'actualització serà necessari indicar una sèrie  de paràmetres per a localitzar el recurs de manera unívoca. Serà obligatori indicar el codi INE de l'ABSS (`CodINE`), l'identificador intern del recurs a l'Hèstia (`IdRecurs`) i els camps del recurs que es desitgen actualitzar: l'estat del recurs (`EstatNou`), la data de finalització (`DataFins`) i l'import del recurs (`Import`). Finalment, caldrà informar l'identificador intern del professional que sol·licita l'operació (`IdUsrMod`) i la data (`DtModificacio`) per poder traçar i auditar la resolució. 
 
 És necessari indicar que només es permetran actualitzar recursos associats a l'ABBS que realitza la petició. A més, tots els paràmetres són obligatoris.  Per tant, s'aconsella realitzar una consulta sobre el recurs abans de  realitzar l'actualització, amb la finalitat d'obtenir els valors actuals del recurs. D'aquesta manera es podrà enviar el valor que actualment té el recurs, si no es vol modificar algun dels valors.
 
@@ -26,8 +26,8 @@ La missatgeria específica de la petició *HESTIA_RESOLUCIORECURS* es troba defi
 | | 3: Desistiment |
 |DadesEspecifiques/DataFins | Nova data de finalització del recurs |
 |DadesEspecifiques/Import | Import del recurs concedit |
-|DadesEspecifiques/IdUsuariModificacio | Identificador intern del professional que realitza la modificació |
-|DadesEspecifiques/DataModificacio | Data en la qual es realitza la modificació |
+|DadesEspecifiques/IdUsrMod | Identificador intern del professional que realitza la modificació |
+|DadesEspecifiques/DtModificacio | Data en la qual es realitza la modificació |
 
 ## 1.2. Resposta - dades específiques
 La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al document [Resposta_DadesEspecifiques_ResolucioRecursos.xsd](xsd/Resposta_DadesEspecifiques_ResolucioRecursos.xsd)
@@ -48,7 +48,7 @@ La missatgeria específica de la resposta *HESTIA_RECURSOS* es troba definida al
 ## 1.3. Joc de proves
 El joc de proves del servei vàlid per a l’entorn de pre-producció, és el que es detalla a continuació:
 
-|codINE | IdRecurs | EstatNou | DataFins | Import | IdUsuariModificacio | DataModificacio | Resultat|
+|codINE | IdRecurs | EstatNou | DataFins | Import | IdUsrMod | DtModificacio | Resultat|
 |------ | ---------- |------ |------ |------ |------ |------ |------ |
 |999999999 | | | | | | | (-9) Només es pot accedir a informació de la pròpia ABSS que realitza la consulta|
 |9821920002 | 100 | | | | | | (-2)  Identificador de recurs no vàlid |
@@ -94,8 +94,8 @@ El joc de proves del servei vàlid per a l’entorn de pre-producció, és el qu
                         <EstatNou>1</EstatNou>
                         <DataFins>2020-03-03T23:00:00.000</DataFins>
                         <Import>334.3</Import>
-                        <IdUsuariModificacio>370000000</IdUsuariModificacio>
-                        <DataModificacio>2020-03-03T12:08:52.000</DataModificacio>
+                        <IdUsrMod>370000000</IdUsrMod>
+                        <DtModificacio>2020-03-03T12:08:52.000</DtModificacio>
                      </DadesEspecifiques>
                   </ns0:DatosEspecificos>
                </ns0:SolicitudTransmision>

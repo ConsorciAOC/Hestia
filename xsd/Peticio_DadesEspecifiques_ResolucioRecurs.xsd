@@ -11,13 +11,12 @@
         <xs:element name="EstatNou" type="xs:int" minOccurs="0"/>
         <xs:element name="DataFins" type="xs:dateTime" minOccurs="0"/>
         <xs:element name="Import" type="xs:double" minOccurs="0"/>
-        <xs:element name="IdUsuariModificacio" type="xs:int"/>
-        <xs:element name="DataModificacio" type="xs:dateTime"/>
+        <xs:element name="IdUsrMod" type="xs:int"/>
+        <xs:element name="DtModificacio" type="xs:dateTime"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>
-
 
 
 
