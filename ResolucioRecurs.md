@@ -19,7 +19,6 @@ La missatgeria específica de la petició *HESTIA_RESOLUCIORECURS* es troba defi
 |------- | ----------|
 |DadesEspecifiques/CodINE | Codi INE de l'Àrea Bàsica de Serveis Socials |
 |DadesEspecifiques/IdRecurs | Identificador intern d'un recurs dins de l'Hèstia. |
-|DadesEspecifiques/IdTipusRecurs | Identificador del [tipus de recurs](TipusRecurs.md) dependent de l’ABSS |
 |DadesEspecifiques/EstatNou | Identificador del nou estat que es vol assignar al recurs |
 | | 0: Preassignat |
 | | 1: Concedit |
