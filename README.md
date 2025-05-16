@@ -5,7 +5,9 @@ El servei **Hèstia** permet gestionar bona part de les matèries que es porten 
 
 A continuació es descriu les diferents modalitats de consum que s'ofereixen per al servei **Hèstia** i que estan a disposició dels integradors. El Backend de l'**Hèstia** s'integra dins de l'arquitectura de la Plataforma de Col·laboració Interadministrativa (en endavant _PCI_) a mode d'un nou servei accessible a través de la MTI.
 
-Per tant els integradors que vulguin consumir els serveis de l'**Hèstia** ho hauran de fer a través de la missatgeria de la _PCI_ utilitzant l'element `<DatosEspecificos>` d'aquesta. Per a més informació podeu consultar [el document d'integració de la _PCI_](https://www.aoc.cat/knowledge-base/plataforma-de-col-laboracio-administrativa-2)
+Per tant els integradors que vulguin consumir els serveis de l'**Hèstia** ho hauran de fer a través de la missatgeria de la _PCI_ utilitzant l'element `<DatosEspecificos>` d'aquesta. Per a més informació podeu consultar [el document d'integració de la _PCI_][PCI]
+
+[PCI]:https://github.com/ConsorciAOC/PCI
 
 ![ArquitecturaPCI](img/ArquitecturaPCI.png)
 
